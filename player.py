@@ -13,7 +13,6 @@ class Player:
 		self.__purchase_power = 0
 		self.__actions = Counter(0)
 		self.__buys = 0
-		self.__draws = 0
 		self.__reactions = Counter(0)
 		self.__is_human = human
 		self.__table = table
@@ -27,9 +26,6 @@ class Player:
 	def add_buys(self, n):
 		self.__buys += n
 
-	def add_draws(self, n):
-		self.__draws += n
-
 	def add_reactions(self, n):
 		self.__reactions.int += n
 
@@ -41,6 +37,14 @@ class Player:
 
 	def draw_cards(self, how_many):
 		spillover = how_many - self.__deck.get_remaining()
+		lacking_cards = spillover - self.__discard.get_remaining()
+
+		if lacking_cards <= 0:
+			lacking_cards = 0
+		elif lacking_cards == 1:
+			print("You are lacking " + str(lacking_cards) + " card.  You cannot draw anymore.")
+		else:
+			print("You are lacking " + str(lacking_cards) + " cards.  You cannot draw anymore.")
 
 		if spillover > 0:
 			for i in range(how_many - spillover):
@@ -48,7 +52,7 @@ class Player:
 
 			self.__discard.cycle_card(self.__deck)
 
-			for i in range(spillover):
+			for i in range(spillover - lacking_cards):
 				self.draw_card()
 		else:
 			for i in range(how_many):
@@ -69,16 +73,29 @@ class Player:
 			self.__hand.transfer_top_card(self.__discard)
 
 	def __print_hand(self):
-		print("Hand:")
+		print("\nHand:")
 		self.__hand.print()
+		print("\n")
 
 	def __print_discard(self):
-		print("Discard:")
+		print("\nDiscard:")
 		self.__discard.print()
+		print("\n")
 
 	def __print_deck(self):
-		print("Deck")
+		print("\nDeck")
 		self.__deck.print()
+		print("\n")
+
+	def __print(self):
+		print("\nPlayer:")
+		print("Actions:  " + str(self.__actions.int))
+		print("Reactions:  " + str(self.__reactions.int))
+		print("Buys:  " + str(self.__buys))
+		print("Coin:  " + str(self.__purchase_power))
+		self.__print_hand()
+		self.__print_discard()
+		self.__print_deck()
 
 	def __gain_turn_events(self):
 		self.add_actions(1)
@@ -88,15 +105,19 @@ class Player:
 		if chances > 0 and self.__hand.contains_one_of(acceptable_card_type):
 			hand_index = int(input("Please identify a card from hand you would like to play by providing its index:  "))
 
-			if self.__hand.get_card(hand_index).get_type() in acceptable_card_type:
+			if hand_index < 0:
+				print("You have elected to forfeit any remaining plays.")
+				if counter is not None:
+					counter.int = 0
+			elif hand_index >= self.__hand.get_remaining():
+				print("Acceptible inputs range from 0 to " + str(self.__hand.get_remaining() - 1) + ".  Try again.")
+				self.play_card(acceptable_card_type, chances - 1, counter)
+			elif self.__hand.get_card(hand_index).get_type() in acceptable_card_type:
 				self.__hand.get_card(hand_index).play(self)
 				self.__hand.transfer_card(hand_index, self.__discard)
 				if counter is not None:
 					counter.int -= 1
-			elif hand_index < 0:
-				print("You have elected to forfeit any remaining plays.")
-				if counter is not None:
-					counter.int = 0
+				self.__print()
 			else:
 				self.play_card(acceptable_card_type, chances - 1, counter)
 		elif chances <= 0:
@@ -118,15 +139,16 @@ class Player:
 		pass
 
 	def take_buy(self):
-		print("Please play all Treasure cards that you want to play.")
+		if self.__hand.contains_one_of([Card.CardType.Treasure]):
+			print("Please play all Treasure cards that you want to play.")
 
-		play_another = Counter(self.__hand.get_card_type_count(Card.CardType.Treasure))
-		while play_another.int > 0:
-			self.play_card([Card.CardType.Treasure], 3, play_another)
-		self.buy_card()
+			play_another = Counter(self.__hand.get_card_type_count(Card.CardType.Treasure))
+			while play_another.int > 0:
+				self.play_card([Card.CardType.Treasure], 3, play_another)
+		self.buy_card(3)
 
-	def buy_card(self):
-		while self.__buys > 0 and not self.__table.are_there_any_empty_piles():
+	def buy_card(self, chances):
+		while self.__buys > 0 and not self.__table.are_there_any_empty_piles() and chances > 0:
 			pile_index = int(input("Please identify a pile from the table that you'd like to purchase:  "))
 			self.__table.get_pile(pile_index).transfer_top_card(self.__discard)
 			self.__buys -= 1
@@ -136,10 +158,10 @@ class Player:
 		self.__print_hand()
 		self.__gain_turn_events()
 		self.take_action()
-		self.__print_discard()
-		self.__print_deck()
+		# self.__print_discard()
+		# self.__print_deck()
 		# self.give_reaction()
 		self.take_buy()
-		# self.discard_remaining_hand()
-		# self.draw_hand()
-		# self.__print_hand()
+		self.discard_remaining_hand()
+		self.draw_hand()
+		self.__print_hand()

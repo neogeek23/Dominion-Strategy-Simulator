@@ -27,9 +27,11 @@ class Card:
 		player.add_buys(self.__buy)
 		player.add_purchase_power(self.__coin)
 		player.add_reactions(self.__reaction)
-		self.effect()
+		player.draw_cards(self.__draw)
+		self.effect(player)
 
-	def effect(self):
+	def effect(self, player):
+		# This is here so that 'special' cards can override this function so that unique card effects can happen.
 		pass
 
 	def get_name(self):
