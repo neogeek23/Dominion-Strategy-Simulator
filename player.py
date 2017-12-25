@@ -98,8 +98,10 @@ class Player:
 		self.__print_deck()
 
 	def __gain_turn_events(self):
-		self.add_actions(1)
-		self.add_buys(1)
+		self.__actions.int = 1
+		self.__buys = 1
+		self.__purchase_power = 0
+		self.__reactions.int = 0
 
 	def play_card(self, acceptable_card_type, chances, counter):
 		if chances > 0 and self.__hand.contains_one_of(acceptable_card_type):

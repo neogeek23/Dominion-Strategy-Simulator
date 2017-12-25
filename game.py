@@ -51,7 +51,7 @@ def get_card_info():
 	#		[name, 		cost, cardtype,			    	v,	c, a, r, b, d, effect, count] - value to pass to Card()
 	return [["Copper",		0, Card.CardType.Treasure,	0,	1, 0, 0, 0, 0, None, 60],   # 1
 			["Silver",		3, Card.CardType.Treasure,	0,	2, 0, 0, 0, 0, None, 40],   # 2
-			["Gold",		6, Card.CardType.Treasure,	0,	3, 0, 0, 0, 0, None, 30],   # 3
+			["Gold",		6, Card.CardT]ype.Treasure,	0,	3, 0, 0, 0, 0, None, 30],   # 3
 
 			["Estate",		2, Card.CardType.Victory,	1,	0, 0, 0, 0, 0, None, 24],   # 4
 			["Dutchy",		5, Card.CardType.Victory,	3,	0, 0, 0, 0, 0, None, 12],   # 5
