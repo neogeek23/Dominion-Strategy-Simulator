@@ -19,10 +19,14 @@ def setup_new_game(game_list, parameter, card_info):
 	index = 0
 	for p in parameter[2:]:
 		if p:
-			card = card_info[index][8](card_info[index][0], card_info[index][1], card_info[index][2],
-	                                   card_info[index][3], card_info[index][4], card_info[index][5],
-	                                   card_info[index][6], card_info[index][7], None)
-			t.add_pile(card, card_info[index][9])
+			for i in range(card_info[index][9]):
+				card = card_info[index][8](card_info[index][0], card_info[index][1], card_info[index][2],
+		                                   card_info[index][3], card_info[index][4], card_info[index][5],
+		                                   card_info[index][6], card_info[index][7], None)
+				if i ==0:
+					t.add_pile(card, 1)
+				else:
+					t.get_pile(t.get_pile_index_of_card(card_info[index][0])).add_card(card)
 		index += 1
 
 	for i in range(humans):

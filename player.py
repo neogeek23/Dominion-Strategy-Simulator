@@ -71,7 +71,6 @@ class Player:
 			for i in range(ds[1]):
 				table.get_pile(index).transfer_top_card(self.__deck)
 				self.__claim_top_card(self.__deck)
-				print("Top card:  " + str(self.__deck.get_top_card().get_owner()) + " " + str(self.__deck.get_top_card().get_name()))
 		self.__deck.shuffle()
 
 	def draw_hand(self):
@@ -144,7 +143,8 @@ class Player:
 				print("You do not have enough coin.  Try again.")
 				chances -= 1
 			else:
-				print("Buying card " + self.__table.get_pile(pile_index).get_card_group().get_name())
+				print("Player " + str(self.get_table().get_players().index(self)) + " buying card " +
+				      self.__table.get_pile(pile_index).get_card_group().get_name())
 				self.__table.get_pile(pile_index).transfer_top_card(self.__discard)
 				self.__claim_top_card(self.__discard)
 				self.__buys -= 1
