@@ -10,6 +10,14 @@ class Hand(Supply):
 			result |= at in unique_types
 		return result
 
+	def get_card_type_count(self, card_type):
+		result = 0
+
+		for c in self._Supply__card:
+			if c.get_type() == card_type:
+				result += 1
+		return result
+
 	def __get_unique_types(self):
 		unique_type = list()
 
@@ -18,11 +26,3 @@ class Hand(Supply):
 			if not current_type in unique_type:
 				unique_type.append(current_type)
 		return unique_type
-
-	def get_card_type_count(self, card_type):
-		result = 0
-
-		for c in self._Supply__card:
-			if c.get_type() == card_type:
-				result += 1
-		return result

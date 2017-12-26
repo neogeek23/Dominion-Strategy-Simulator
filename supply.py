@@ -22,9 +22,14 @@ class Supply:
 	def get_card(self, n):
 		return self.__card[n]
 
+	def get_top_card(self):
+		return self.__card[len(self.__card) - 1]
+
 	def get_remaining(self):
 		return len(self.__card)
 
 	def print(self):
+		index = 0
 		for c in self.__card:
-			print(c.identify())
+			print(str(index) + ":  " + c.identify())
+			index += 1

@@ -3,14 +3,14 @@ from enum import Enum, auto
 
 class Card:
 	class CardType(Enum):
-		Action = auto()
-		Attack = auto()
 		Treasure = auto()
+		Action = auto()
+		Reaction = auto()
+		Attack = auto()
 		Victory = auto()
 		Curse = auto()
-		Reaction = auto()
 
-	def __init__(self, name, cost, cardtype, value, coin, action, reaction, buy, draw, effect):
+	def __init__(self, name, cost, cardtype, value, coin, action, buy, draw, owner):
 		self.__name = name
 		self.__cost = cost
 		self.__coin = coin
@@ -18,20 +18,22 @@ class Card:
 		self.__action = action
 		self.__buy = buy
 		self.__draw = draw
-		self.__effect = effect
 		self.__value = value
-		self.__reaction = reaction
+		self.__owner = owner
 
-	def play(self, player):
-		player.add_actions(self.__action)
-		player.add_buys(self.__buy)
-		player.add_purchase_power(self.__coin)
-		player.add_reactions(self.__reaction)
-		player.draw_cards(self.__draw)
-		self.effect(player)
+	def play(self):
+		self.__owner.add_actions(self.__action)
+		self.__owner.add_buys(self.__buy)
+		self.__owner.add_purchase_power(self.__coin)
+		self.__owner.draw_cards(self.__draw)
+		self.effect()
 
-	def effect(self, player):
+	def effect(self):
 		# This is here so that 'special' cards can override this function so that unique card effects can happen.
+		pass
+
+	def passive(self):
+		# This is here so that 'special' cards can override this function so that unique card passives can happen.
 		pass
 
 	def get_name(self):
@@ -39,6 +41,15 @@ class Card:
 
 	def get_type(self):
 		return self.__type
+
+	def get_cost(self):
+		return self.__cost
+
+	def set_owner(self, owner):
+		self.__owner = owner
+
+	def get_owner(self):
+		return self.__owner
 
 	def identify(self):
 		return self.__name + ", " + str(self.__type) + ", " + str(self.__cost)

@@ -16,6 +16,9 @@ class Table:
 	def get_player(self, n):
 		return self.__player[n]
 
+	def get_players(self):
+		return self.__player
+
 	def add_pile(self, card, n):
 		p = Pile()
 		p.add_cards(card, n)
@@ -26,6 +29,9 @@ class Table:
 
 	def get_pile(self, n):
 		return self.__pile[n]
+
+	def get_pile_count(self):
+		return len(self.__pile)
 
 	def get_pile_index_of_card(self, card_name):
 		result = 0
@@ -43,7 +49,7 @@ class Table:
 	def play(self):
 		turn = 0
 		# turn < 4 is for testing, otherwise endless as buying cards is not yet done
-		while not self.are_there_any_empty_piles() and turn < 4:
+		while not self.are_there_any_empty_piles() and turn < 10:
 			self.print()
 			self.__player[turn % len(self.__player)].take_turn()
 			turn += 1
@@ -53,8 +59,11 @@ class Table:
 				if p.get_score() > self.__winning_score:
 					self.__winning_score = p.get_score
 					self.__winner = p
+			print("\n\nPlayer " + str(self.__winner) + " won with " + str(self.__winning_score) + " points.\n\n")
 
 	def print(self):
-		print("Piles:")
+		print("\nPiles:  ")
+		index = 0
 		for s in self.__pile:
-			print(s.get_card_group().identify() + ":  " + str(s.get_remaining()))
+			print(str(index) + ":  " + s.get_card_group().identify() + ":  " + str(s.get_remaining()))
+			index += 1
