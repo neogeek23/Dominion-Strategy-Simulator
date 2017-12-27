@@ -17,3 +17,5 @@ Things to do:
 7)  Big Money Cards:  Adventurer, Bureaucrat, Chancellor, Chapel, Feast, Laboratory, Moneylender, &  Throne Room
 8)  Choosing play sets
 9)  Multiplayer
+10) Interaction cards:  Council Room, Festival, Library, Spy, Theif
+11) Size Distortion cards:  Gardens, Woodcutter, & Witch
