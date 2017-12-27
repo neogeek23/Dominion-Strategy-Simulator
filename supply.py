@@ -12,12 +12,32 @@ class Supply:
 	def get_supply(self):
 		return self.__card
 
-	def transfer_top_card(self, recipient_supply):
-		self.transfer_card(len(self.__card) - 1, recipient_supply)
+	def get_index_of_card_by_name(self, name):
+		for c in self.__card:
+			if c.get_name() == name:
+				return self.__card.index(c)
+		return -1
 
-	def transfer_card(self, n, recipient_supply):
+	def get_index_of_card_by_card(self, card):
+		for c in self.__card:
+			if c == card:
+				return self.__card.index(c)
+		return -1
+
+	def transfer_top_card(self, recipient_supply):
+		self.transfer_card_by_index(len(self.__card) - 1, recipient_supply)
+
+	def transfer_card_by_index(self, n, recipient_supply):
 		transfer_card = self.__card.pop(n)
 		recipient_supply.add_card(transfer_card)
+
+	def transfer_card_by_card(self, card, recipient_supply):
+		card_index = self.get_index_of_card_by_card(card)
+
+		if card_index >= 0:
+			self.transfer_card_by_index(card_index, recipient_supply)
+		else:
+			raise ValueError('Card not found in hand during attempt to transfer card.')
 
 	def get_card(self, n):
 		return self.__card[n]

@@ -35,6 +35,9 @@ class Player:
 	def get_hand(self):
 		return self.__hand
 
+	def get_discard(self):
+		return self.__discard
+
 	def get_score(self):
 		return 0
 
@@ -81,7 +84,7 @@ class Player:
 			self.__hand.transfer_top_card(self.__discard)
 
 	def discard_from_hand(self, n):
-		self.__hand.transfer_card(n, self.__discard)
+		self.__hand.transfer_card_by_index(n, self.__discard)
 
 	def play_card(self, acceptable_card_type, chances, counter):
 		if chances > 0 and self.__hand.contains_one_of(acceptable_card_type):
@@ -95,10 +98,10 @@ class Player:
 				print("Acceptable inputs range from 0 to " + str(self.__hand.get_remaining() - 1) + ".  1 chance lost.")
 				self.play_card(acceptable_card_type, chances - 1, counter)
 			elif self.__hand.get_card(hand_index).get_type() in acceptable_card_type:
-				print("Player " + str(self.get_table().get_players().index(self)) + " playing:  " +
-				      self.__hand.get_card(hand_index).get_name())
-				self.__hand.get_card(hand_index).play()
-				self.__hand.transfer_card(hand_index, self.__discard)
+				card = self.__hand.get_card(hand_index)
+				print("Player " + str(self.get_table().get_players().index(self)) + " playing:  " + card.get_name())
+				card.play()
+				self.__hand.transfer_card_by_card(card, self.__discard)
 				if counter is not None:
 					counter.int -= 1
 				self.__print()
