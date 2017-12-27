@@ -2,6 +2,8 @@ from table import Table
 from player import Player
 from card import Card
 from militia import Militia
+from moat import Moat
+from cellar import Cellar
 
 
 def main():
@@ -11,10 +13,15 @@ def main():
 	play_game(game[0])
 
 
+def play_game(game_table):
+	game_table.play()
+
+
+# place holder setup for testing until frontend constructed
 def setup_new_game(game_list, parameter, card_info):
 	t = Table()
 	humans = parameter[0]
-	bots = parameter[1]
+	# bots = parameter[1]
 
 	index = 0
 	for p in parameter[2:]:
@@ -35,22 +42,18 @@ def setup_new_game(game_list, parameter, card_info):
 		human.draw_hand()
 		t.add_player(human)
 
-	for i in range(bots):
-		bot = Player(False, t)
-		bot.draw_deck(t, get_starting_deck())
-		bot.draw_hand()
-		t.add_player(bot)
+	# for i in range(bots):
+	# 	bot = Player(False, t)
+	# 	bot.draw_deck(t, get_starting_deck())
+	# 	bot.draw_hand()
+	# 	t.add_player(bot)
 
 	game_list.append(t)
 
 
-def play_game(game_table):
-	game_table.play()
-
-
 def get_game_parameters():
 	# humans, bots, card #1, card #2, ... etc
-	return [1, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
+	return [2, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
 
 
 def get_card_info():
@@ -63,12 +66,12 @@ def get_card_info():
 			["Dutchy",		5, Card.CardType.Victory,	3,	0, 0, 0, 0, Card,       12],    # 5
 			["Province",	8, Card.CardType.Victory,	6,	0, 0, 0, 0, Card,       12],    # 6
 			["Curse",		0, Card.CardType.Curse,		-1,	0, 0, 0, 0, Card,       30],    # 7
-			["Cellar",		2, Card.CardType.Action,	0,	0, 1, 0, 0, Card,       10],    # 8*
+			["Cellar",		2, Card.CardType.Action,	0,	0, 1, 0, 0, Cellar,     10],    # 8
 			["Market",		5, Card.CardType.Action, 	0,	1, 1, 1, 1, Card,       10],    # 9
 			["Merchant",    3, Card.CardType.Action,    0,  0, 1, 0, 1, Card,       10],    # 10*
 			["Militia",		4, Card.CardType.Attack,	0,	2, 0, 0, 0, Militia,    10],    # 11
 			["Mine", 		5, Card.CardType.Action, 	0, 	0, 0, 0, 0, Card,       10],    # 12*
-			["Moat",		2, Card.CardType.Reaction,	0,	0, 0, 0, 2, Card,       10],    # 13*
+			["Moat",		2, Card.CardType.Reaction,	0,	0, 0, 0, 2, Moat,       10],    # 13
 			["Remodel", 	4, Card.CardType.Action,	0,	0, 0, 0, 0, Card,       10],    # 14*
 			["Smithy",		4, Card.CardType.Action,	0,	0, 0, 0, 3, Card,       10],    # 15
 			["Village",		3, Card.CardType.Action,	0,	0, 2, 0, 1, Card,       10],    # 16
@@ -78,6 +81,7 @@ def get_card_info():
 def get_starting_deck():
 	# return [["Copper", 7], ["Estate", 3]]
 	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
-	return [["Militia", 4], ["Village", 3], ["Smithy", 3]]
+	return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
+
 
 main()

@@ -10,6 +10,8 @@ class Card:
 		Victory = auto()
 		Curse = auto()
 
+	prevent_attack = False
+
 	def __init__(self, name, cost, cardtype, value, coin, action, buy, draw, owner):
 		self.__name = name
 		self.__cost = cost

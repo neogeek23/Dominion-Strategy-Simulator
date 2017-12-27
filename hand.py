@@ -18,6 +18,21 @@ class Hand(Supply):
 				result += 1
 		return result
 
+	def blocks_attack(self, what_attack):
+		yes_no = False
+		found_at = -1
+
+		for c in self._Supply__card:
+			if c.prevent_attack:
+				found_at = self._Supply__card.index(c)
+
+		if found_at >= 0:
+			yes_no = "Y" == input("Player " + str(self._Supply__card[found_at].get_owner().get_table().get_players().
+												  index(self._Supply__card[found_at].get_owner()))
+								  + ", enter 'Y' if you'd like to reveal " + self._Supply__card[found_at].get_name()
+								  + " to block the " + what_attack + " attack:  ")
+		return yes_no
+
 	def __get_unique_types(self):
 		unique_type = list()
 
