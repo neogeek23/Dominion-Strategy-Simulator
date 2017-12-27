@@ -5,10 +5,10 @@ This is a recreation of https://en.wikipedia.org/wiki/Dominion_(card_game).  Thi
 Things done:
 1)  Basic structure of game
 2)  Basic cards and players
-3)  Special cards:  Moat, Cellar, and Militia
+3)  Special cards:  Merchant, Cellar, Moat, and Militia
 
 Things to do:
-1)  Special cards:  Merchant, Mine, Remodel, & Workshop
+1)  Special cards:  Mine, Remodel, & Workshop
 2)  Testing classes
 3)  Bot player with big money strategy
 4)  Django server and hosting
