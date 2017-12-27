@@ -4,7 +4,7 @@ This is a recreation of https://en.wikipedia.org/wiki/Dominion_(card_game).  Thi
 
 Things done:
 1)  Basic structure of game
-2)  Basic cards and players
+2)  Basic cards and human players
 3)  Special cards:  Merchant, Cellar, Moat, and Militia
 
 Things to do:
