@@ -19,6 +19,9 @@ class Table:
 	def get_players(self):
 		return self.__player
 
+	def get_trash(self):
+		return self.__trash
+
 	def add_pile(self, card, n):
 		p = Pile()
 		p.add_cards(card, n)

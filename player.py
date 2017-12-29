@@ -73,7 +73,7 @@ class Player:
 			index = table.get_pile_index_of_card(ds[0])
 			for i in range(ds[1]):
 				table.get_pile(index).transfer_top_card(self.__deck)
-				self.__claim_top_card(self.__deck)
+				self.claim_top_card(self.__deck)
 		self.__deck.shuffle()
 
 	def draw_hand(self):
@@ -149,7 +149,7 @@ class Player:
 				print("Player " + str(self.get_table().get_players().index(self)) + " buying card " +
 				      self.__table.get_pile(pile_index).get_card_group().get_name())
 				self.__table.get_pile(pile_index).transfer_top_card(self.__discard)
-				self.__claim_top_card(self.__discard)
+				self.claim_top_card(self.__discard)
 				self.__buys -= 1
 
 	def take_turn(self):
@@ -162,7 +162,7 @@ class Player:
 		self.draw_hand()
 		self.print_hand()
 
-	def __claim_top_card(self, supply):
+	def claim_top_card(self, supply):
 		supply.get_top_card().set_owner(self)
 
 	def print_hand(self):

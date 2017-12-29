@@ -55,3 +55,10 @@ class Card:
 
 	def identify(self):
 		return self.__name + ", " + str(self.__type) + ", " + str(self.__cost)
+
+	def __get_index_not_self(self):
+		result = -1
+		for c in self._Card__owner.get_hand().get_supply():
+			if c != self:
+				result = self._Card__owner.get_hand().get_supply().index(c)
+		return result

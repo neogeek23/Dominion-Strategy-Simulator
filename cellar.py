@@ -19,13 +19,8 @@ class Cellar(Card):
 				self._Card__owner.print_hand()
 				cards_discarded += 1
 				# in case last card is discarded as that will kill loop & set to itself
-				hand_index = self.__get_last_non_cellar_card()
+				hand_index = self.__get_index_not_self()
 			have_not_run_yet = False
 		self._Card__owner.add_actions(cards_discarded)
 
-	def __get_last_non_cellar_card(self):
-		result = -1
-		for c in self._Card__owner.get_hand().get_supply():
-			if "Cellar" not in type(c).__name__:
-				result = self._Card__owner.get_hand().get_supply().index(c)
-		return result
+
