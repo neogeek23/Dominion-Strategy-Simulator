@@ -6,6 +6,7 @@ from moat import Moat
 from cellar import Cellar
 from merchant import Merchant
 from mine import Mine
+from remodel import Remodel
 
 
 def main():
@@ -72,9 +73,9 @@ def get_card_info():
 			["Market",		5, Card.CardType.Action, 	0,	1, 1, 1, 1, Card,       10],    # 9
 			["Merchant",    3, Card.CardType.Action,    0,  0, 1, 0, 1, Merchant,	10],    # 10
 			["Militia",		4, Card.CardType.Attack,	0,	2, 0, 0, 0, Militia,	10],    # 11
-			["Mine", 		5, Card.CardType.Action, 	0, 	0, 0, 0, 0, Mine,       10],    # 12*
+			["Mine", 		5, Card.CardType.Action, 	0, 	0, 0, 0, 0, Mine,       10],    # 12
 			["Moat",		2, Card.CardType.Reaction,	0,	0, 0, 0, 2, Moat,       10],    # 13
-			["Remodel", 	4, Card.CardType.Action,	0,	0, 0, 0, 0, Card,       10],    # 14*
+			["Remodel", 	4, Card.CardType.Action,	0,	0, 0, 0, 0, Remodel,    10],    # 14
 			["Smithy",		4, Card.CardType.Action,	0,	0, 0, 0, 3, Card,       10],    # 15
 			["Village",		3, Card.CardType.Action,	0,	0, 2, 0, 1, Card,       10],    # 16
 			["Workshop",	4, Card.CardType.Action,	0,	0, 0, 0, 0, Card,       10]]    # 17*
@@ -108,7 +109,7 @@ def get_starting_deck():
 	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]
-	return [["Copper", 6], ["Mine", 4]]
+	return [["Copper", 6], ["Mine", 2], ["Remodel", 2]]
 
 
 main()

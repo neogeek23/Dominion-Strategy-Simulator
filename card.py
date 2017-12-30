@@ -60,5 +60,13 @@ class Card:
 		result = -1
 		for c in self._Card__owner.get_hand().get_supply():
 			if c != self:
-				result = self._Card__owner.get_hand().get_supply().index(c)
+				result = self._Card__owner.get_hand().get_player_index()
 		return result
+
+	def __print_card_list(self, card, message):
+		print("\nPlayer " + str(self._Card__owner.get_player_index()) + " " + message)
+
+		counter = 0
+		for c in card:
+			print(str(counter) + ":  " + c.identify())
+			counter += 1

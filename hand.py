@@ -27,8 +27,7 @@ class Hand(Supply):
 				found_at = self._Supply__card.index(c)
 
 		if found_at >= 0:
-			yes_no = "Y" == input("Player " + str(self._Supply__card[found_at].get_owner().get_table().get_players().
-												  index(self._Supply__card[found_at].get_owner()))
+			yes_no = "Y" == input("Player " + str(self._Supply__card[found_at].get_owner().get_player_index())
 								  + ", enter 'Y' if you'd like to reveal " + self._Supply__card[found_at].get_name()
 								  + " to block the " + what_attack + " attack:  ")
 		return yes_no

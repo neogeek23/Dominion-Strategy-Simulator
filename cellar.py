@@ -21,6 +21,6 @@ class Cellar(Card):
 				# in case last card is discarded as that will kill loop & set to itself
 				hand_index = self.__get_index_not_self()
 			have_not_run_yet = False
-		self._Card__owner.add_actions(cards_discarded)
+		self._Card__owner.draw_cards(cards_discarded)
 
 

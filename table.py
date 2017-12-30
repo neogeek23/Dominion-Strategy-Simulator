@@ -38,6 +38,7 @@ class Table:
 
 	def get_pile_index_of_card(self, card_name):
 		result = 0
+
 		for p in self.__pile:
 			if p.get_card_group().get_name() == card_name:
 				result = self.__pile.index(p)
@@ -69,4 +70,10 @@ class Table:
 		index = 0
 		for s in self.__pile:
 			print(str(index) + ":  " + s.get_card_group().identify() + ":  " + str(s.get_remaining()))
+			index += 1
+
+		print("\nTrash:  ")
+		index = 0
+		for s in self.__trash.get_supply():
+			print(str(index) + ":  " + s.identify())
 			index += 1

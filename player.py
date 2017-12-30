@@ -38,6 +38,9 @@ class Player:
 	def get_discard(self):
 		return self.__discard
 
+	def get_player_index(self):
+		return self.__table.get_players().index(self)
+
 	def get_score(self):
 		return 0
 
@@ -130,11 +133,12 @@ class Player:
 			play_another = Counter(self.__hand.get_card_type_count(Card.CardType.Treasure))
 			while play_another.int > 0:
 				self.play_card([Card.CardType.Treasure], self.__std_chances, play_another)
-		self.buy_card(3)
+		self.buy_card(self.__std_chances)
 
 	def buy_card(self, chances):
+		self.__table.print()
 		while self.__buys > 0 and not self.__table.are_there_any_empty_piles() and chances > 0:
-			pile_index = int(input("Please identify a pile from the table that you'd like to purchase:  "))
+			pile_index = int(input("\nPlease identify a pile from the table that you'd like to purchase:  "))
 
 			if pile_index < 0:
 				print("You have elected to forfeit any remaining plays.")
@@ -153,7 +157,6 @@ class Player:
 				self.__buys -= 1
 
 	def take_turn(self):
-		print("Deck Size:  " + str(self.__deck.get_remaining()))
 		self.__turn_setup()
 		self.__print()
 		self.take_action()
@@ -174,7 +177,7 @@ class Player:
 		self.__discard.print()
 
 	def __print_deck(self):
-		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Deck")
+		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Deck:")
 		self.__deck.print()
 
 	def __print(self):
