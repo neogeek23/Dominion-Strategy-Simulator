@@ -5,17 +5,18 @@ This is a recreation of https://en.wikipedia.org/wiki/Dominion_(card_game).  Thi
 Things done:
 1)  Basic structure of game
 2)  Basic cards and human players
-3)  Special Base cards:  Mine, Merchant, Cellar, Moat, and Militia
+3)  Special Base cards:  Remodel, Mine, Merchant, Cellar, Moat, and Militia
 
 Things to do:
-1)  Special Base cards:  Remodel, & Workshop
-2)  Testing classes
-3)  Bot player with big money strategy
-4)  Turn Timmer
-5)  Django server and hosting
-6)  HTML5 frontend
-7)  Big Money Cards:  Adventurer, Bureaucrat, Chancellor, Chapel, Feast, Laboratory, Moneylender, &  Throne Room
-8)  Choosing play sets
-9)  Multiplayer
-10) Interaction cards:  Council Room, Festival, Library, Spy, Theif
-11) Size Distortion cards:  Gardens, Woodcutter, & Witch
+1)  Special Base cards:  Workshop
+2)  Clean up code
+3)  Testing classes
+4)  Bot player with big money strategy
+5)  Turn Timmer
+6)  Django server and hosting
+7)  HTML5 frontend
+8)  Big Money Cards:  Adventurer, Bureaucrat, Chancellor, Chapel, Feast, Laboratory, Moneylender, &  Throne Room
+9)  Choosing play sets
+10)  Multiplayer
+11) Interaction cards:  Council Room, Festival, Library, Spy, Theif
+12) Size Distortion cards:  Gardens, Woodcutter, & Witch
