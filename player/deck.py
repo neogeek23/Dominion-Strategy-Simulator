@@ -1,4 +1,4 @@
-from supply import Supply
+from table.supply import Supply
 from random import shuffle
 
 

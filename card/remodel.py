@@ -1,4 +1,4 @@
-from trash_gain_card import TrashGainEffectCard
+from card.trash_gain_card import TrashGainEffectCard
 
 
 class Remodel(TrashGainEffectCard):

@@ -1,5 +1,5 @@
-from card import Card
-from trash_gain_card import TrashGainEffectCard
+from card.card import Card
+from card.trash_gain_card import TrashGainEffectCard
 
 
 class Mine(TrashGainEffectCard):

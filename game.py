@@ -1,12 +1,12 @@
-from table import Table
-from player import Player
-from card import Card
-from militia import Militia
-from moat import Moat
-from cellar import Cellar
-from merchant import Merchant
-from mine import Mine
-from remodel import Remodel
+from table.table import Table
+from player.player import Player
+from card.card import Card
+from card.militia import Militia
+from card.moat import Moat
+from card.cellar import Cellar
+from card.merchant import Merchant
+from card.mine import Mine
+from card.remodel import Remodel
 
 
 def main():

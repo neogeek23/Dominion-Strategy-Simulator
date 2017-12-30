@@ -1,4 +1,4 @@
-from pile import Pile
+from table.pile import Pile
 
 
 class Trash(Pile):

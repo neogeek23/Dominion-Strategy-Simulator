@@ -1,4 +1,4 @@
-from supply import Supply
+from table.supply import Supply
 
 class Pile(Supply):
 	def get_card_group(self):

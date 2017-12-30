@@ -1,8 +1,8 @@
-from deck import Deck
-from discard import Discard
-from hand import Hand
-from card import Card
-from counter import Counter
+from player.deck import Deck
+from player.discard import Discard
+from player.hand import Hand
+from player.counter import Counter
+from card.card import Card
 
 
 class Player:
@@ -57,7 +57,7 @@ class Player:
 		elif lacking_cards == 1:
 			print("You are lacking " + str(lacking_cards) + " card.  You cannot draw anymore.")
 		else:
-			print("You are lacking " + str(lacking_cards) + " cards.  You cannot draw anymore.")
+			print("You are lacking " + str(lacking_cards) + " card.  You cannot draw anymore.")
 
 		if spillover > 0:
 			for i in range(how_many - spillover):
@@ -116,7 +116,7 @@ class Player:
 			if counter is not None:
 				counter.int = 0
 		else:
-			print("There are no more acceptable cards in hand, moving to next phase.")
+			print("There are no more acceptable card in hand, moving to next phase.")
 			if counter is not None:
 				counter.int = 0
 
@@ -128,7 +128,7 @@ class Player:
 
 	def take_buy(self):
 		if self.__hand.contains_one_of([Card.CardType.Treasure]):
-			print("\nPlease play all Treasure cards that you want to play.")
+			print("\nPlease play all Treasure card that you want to play.")
 
 			play_another = Counter(self.__hand.get_card_type_count(Card.CardType.Treasure))
 			while play_another.int > 0:

@@ -1,4 +1,4 @@
-from card import Card
+from card.card import Card
 from random import randint
 
 
@@ -8,7 +8,7 @@ class Militia(Card):
 			if self._Card__owner != player and not player.get_hand().blocks_attack(self.get_name()):
 				player.print_hand()
 				print("Player " + str(self._Card__owner.get_table().get_players().index(player)) + ", you MUST discard "
-				                                                                                   "down to 3 cards.")
+				                                                                                   "down to 3 card.")
 				self.__force_discard(self._Card__owner.get_std_chances(), player)
 
 	def __force_discard(self, chances, player):

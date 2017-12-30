@@ -31,11 +31,11 @@ class Card:
 		self.effect()
 
 	def effect(self):
-		# This is here so that 'special' cards can override this function so that unique card effects can happen.
+		# This is here so that 'special' card can override this function so that unique card effects can happen.
 		pass
 
 	def passive(self):
-		# This is here so that 'special' cards can override this function so that unique card passives can happen.
+		# This is here so that 'special' card can override this function so that unique card passives can happen.
 		pass
 
 	def get_name(self):
