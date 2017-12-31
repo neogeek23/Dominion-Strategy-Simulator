@@ -1,6 +1,6 @@
 # dominiongame
 
-This is a recreation of https://en.wikipedia.org/wiki/Dominion_(card_game).  This is purposed to be able to try out new strategies against a big money bot.  All inputs are console based and console prints are more like notes for testing as the user experience is intended to be web based.  Special effects of special cards are assumed to known or present in a future user experience.  The game is run through game.py and requires python 3 (will not work with python 2).
+This is a recreation of https://en.wikipedia.org/wiki/Dominion_(card_game).  This is purposed to be able to try out new strategies against a big money bot.  All inputs are console based and console prints are more like notes for testing as the user experience is intended to be web based.  Special effects of special cards are assumed to be known or present in a future user experience.  The game is run through game.py and requires python 3 (will not work with python 2).
 
 Things done:
 1)  2nd Edition structure of game
