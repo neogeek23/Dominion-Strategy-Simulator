@@ -9,11 +9,10 @@ Things done:
 
 Things to do:
 1)  Bot player with big money strategy
-2)  Clean up code
-3)  Testing classes
-4)  Turn Timmer
-5)  Django server and hosting
-6)  HTML5 frontend
-7)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
-8)  Choosing play sets
-9)  Multiplayer
+2)  Testing classes
+3)  Turn Timmer
+4)  Django server and hosting
+5)  HTML5 frontend
+6)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
+7)  Choosing play sets
+8)  Multiplayer
