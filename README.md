@@ -13,6 +13,6 @@ Things to do:
 3)  Turn Timmer
 4)  Django server and hosting
 5)  HTML5 frontend
-6)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
-7)  Choosing play sets
-8)  Multiplayer
+6)  Multiplayer
+7)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
+8)  Choosing play sets
