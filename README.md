@@ -10,7 +10,7 @@ Things done:
 Things to do:
 1)  Bot player with big money strategy
 2)  Testing classes
-3)  Turn Timmer
+3)  Turn Timer
 4)  Django server and hosting
 5)  HTML5 frontend
 6)  Multiplayer
