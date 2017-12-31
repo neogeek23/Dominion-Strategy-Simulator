@@ -7,6 +7,7 @@ from card.cellar import Cellar
 from card.merchant import Merchant
 from card.mine import Mine
 from card.remodel import Remodel
+from card.workshop import Workshop
 
 
 def main():
@@ -78,7 +79,7 @@ def get_card_info():
 			["Remodel", 	4, Card.CardType.Action,	0,	0, 0, 0, 0, Remodel,    10],    # 14
 			["Smithy",		4, Card.CardType.Action,	0,	0, 0, 0, 3, Card,       10],    # 15
 			["Village",		3, Card.CardType.Action,	0,	0, 2, 0, 1, Card,       10],    # 16
-			["Workshop",	4, Card.CardType.Action,	0,	0, 0, 0, 0, Card,       10]]    # 17*
+			["Workshop",	4, Card.CardType.Action,	0,	0, 0, 0, 0, Workshop,	10]]    # 17
 	#	Big Money
 	#		["Adventurer",
 	#		["Bureaucrat",
@@ -105,11 +106,11 @@ def get_card_info():
 
 
 def get_starting_deck():
-	# return [["Copper", 7], ["Estate", 3]]
+	return [["Copper", 7], ["Estate", 3]]
 	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]
-	return [["Copper", 6], ["Mine", 2], ["Remodel", 2]]
+	# return [["Copper", 4], ["Mine", 2], ["Remodel", 2], ["Workshop", 2]]
 
 
 main()

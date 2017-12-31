@@ -1,5 +1,5 @@
-from card.trash_gain_card import TrashGainEffectCard
+from card.card_gain_trash import CardGainTrash
 
 
-class Remodel(TrashGainEffectCard):
+class Remodel(CardGainTrash):
 	coin_gain = 2
