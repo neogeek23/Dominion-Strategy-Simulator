@@ -5,16 +5,15 @@ This is a recreation of https://en.wikipedia.org/wiki/Dominion_(card_game).  Thi
 Things done:
 1)  2nd Edition structure of game
 2)  2nd Edition cards and human players
-3)  Special First Play cards in 2nd Edition:  Remodel, Mine, Merchant, Cellar, Moat, and Militia
+3)  Special First Play cards in 2nd Edition:  Workshop, Remodel, Mine, Merchant, Cellar, Moat, and Militia
 
 Things to do:
-1)  Special Base cards:  Workshop
-2)  Bot player with big money strategy
-3)  Clean up code
-4)  Testing classes
-5)  Turn Timmer
-6)  Django server and hosting
-7)  HTML5 frontend
-8)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
-9)  Choosing play sets
-10)  Multiplayer
+1)  Bot player with big money strategy
+2)  Clean up code
+3)  Testing classes
+4)  Turn Timmer
+5)  Django server and hosting
+6)  HTML5 frontend
+7)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
+8)  Choosing play sets
+9)  Multiplayer
