@@ -53,3 +53,6 @@ class Supply:
 		for c in self.__card:
 			print(str(index) + ":  " + c.identify())
 			index += 1
+
+	def __str__(self):
+		return "A " + type(self).__name__ + " with " + str(len(self.__card)) + " cards."

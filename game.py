@@ -35,7 +35,7 @@ def setup_new_game(game_list, parameter, card_info):
 		                                   card_info[index][3], card_info[index][4], card_info[index][5],
 		                                   card_info[index][6], card_info[index][7], None)
 				if i == 0:
-					t.add_pile(card, 1)
+					t.add_pile(card)
 				else:
 					t.get_pile(t.get_pile_index_of_card(card_info[index][0])).add_card(card)
 		index += 1
@@ -106,11 +106,14 @@ def get_card_info():
 
 
 def get_starting_deck():
-	return [["Copper", 7], ["Estate", 3]]
+	# return [["Copper", 7], ["Estate", 3]]
 	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]
 	# return [["Copper", 4], ["Mine", 2], ["Remodel", 2], ["Workshop", 2]]
+	return [["Copper", 1], ["Silver", 1], ["Gold", 1], ["Estate", 1], ["Dutchy", 1], ["Province", 1], ["Cellar", 1],
+			["Market", 1], ["Merchant", 1], ["Militia", 1], ["Mine", 1], ["Moat", 1], ["Remodel", 1], ["Smithy", 1],
+			["Village", 1], ["Workshop", 1]]
 
 
 main()

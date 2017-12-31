@@ -46,7 +46,6 @@ class Player:
 
 	def draw_card(self):
 		self.__deck.transfer_top_card(self.__hand)
-		self.__hand.get_top_card().passive()
 
 	def draw_cards(self, how_many):
 		spillover = how_many - self.__deck.get_remaining()
@@ -195,9 +194,12 @@ class Player:
 		print("Coin:  " + str(self.__purchase_power))
 		self.print_hand()
 		self.__print_discard()
-		self.__print_deck()
+		# self.__print_deck()
 
 	def __turn_setup(self):
 		self.__actions.int = 1
 		self.__buys = 1
 		self.__purchase_power = 0
+
+	def __str__(self):
+		return "Player " + self.get_player_index() + "."

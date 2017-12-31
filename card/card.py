@@ -70,3 +70,6 @@ class Card:
 		for c in card:
 			print(str(counter) + ":  " + c.identify())
 			counter += 1
+
+	def __str__(self):
+		return "A " + self.__name + " card."

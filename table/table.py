@@ -22,9 +22,10 @@ class Table:
 	def get_trash(self):
 		return self.__trash
 
-	def add_pile(self, card, n):
+	def add_pile(self, card):
 		p = Pile()
-		p.add_cards(card, n)
+		p.add_card(card)
+		card.setup()
 		self.__pile.append(p)
 
 	def get_piles(self):
@@ -77,3 +78,6 @@ class Table:
 		for s in self.__trash.get_supply():
 			print(str(index) + ":  " + s.identify())
 			index += 1
+
+	def __str__(self):
+		return "A table with " + str(len(self.__pile)) + " card piles and " + str(len(self.__player)) + " players."
