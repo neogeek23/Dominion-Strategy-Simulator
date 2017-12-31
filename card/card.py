@@ -34,8 +34,8 @@ class Card:
 		# This is here so that 'special' card can override this function so that unique card effects can happen.
 		pass
 
-	def passive(self):
-		# This is here so that 'special' card can override this function so that unique card passives can happen.
+	def setup(self):
+		# This is here so that 'special' card can override this function so that unique card setup effects can happen.
 		pass
 
 	def get_name(self):

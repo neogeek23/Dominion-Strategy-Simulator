@@ -23,7 +23,6 @@ class CardTrash(Card):
 				bonus = tc[index].get_cost()
 				self._Card__owner.get_hand().transfer_card_by_card(tc[index], self._Card__owner.get_table().get_trash())
 				chances = 0
-
 		return bonus
 
 	def trash_card(self):
@@ -41,5 +40,4 @@ class CardTrash(Card):
 					result.append(c)
 				elif c.get_type() in self.trashable_type_restriction:
 					result.append(c)
-
 		return result

@@ -91,26 +91,8 @@ class Player:
 
 	def play_card(self, acceptable_card_type, chances, counter):
 		if chances > 0 and self.__hand.contains_one_of(acceptable_card_type):
-			hand_index = int(input("\nPlease identify a card from hand you would like to play by providing its index:  "))
-
-			if hand_index < 0:
-				print("You have elected to forfeit any remaining plays.")
-				if counter is not None:
-					counter.int = 0
-			elif hand_index >= self.__hand.get_remaining():
-				print("Acceptable inputs range from 0 to " + str(self.__hand.get_remaining() - 1) + ".  1 chance lost.")
-				self.play_card(acceptable_card_type, chances - 1, counter)
-			elif self.__hand.get_card(hand_index).get_type() in acceptable_card_type:
-				card = self.__hand.get_card(hand_index)
-				print("Player " + str(self.get_table().get_players().index(self)) + " playing:  " + card.get_name())
-				card.play()
-				self.__hand.transfer_card_by_card(card, self.__discard)
-				if counter is not None:
-					counter.int -= 1
-				self.__print()
-			else:
-				print("Index in bounds but not an acceptable card type.  Chance to get it right reduced.")
-				self.play_card(acceptable_card_type, chances - 1, counter)
+			hand_index = self.__get_play_input("\nPlease identify a card from hand to play by providing its index:  ")
+			self.__check_play_card(hand_index, counter, acceptable_card_type, chances)
 		elif chances <= 0:
 			print("You have used up all of your chances to enter a valid integer; forfeiting remaining plays.")
 			if counter is not None:
@@ -138,7 +120,7 @@ class Player:
 	def buy_card(self, chances):
 		self.__table.print()
 		while self.__buys > 0 and not self.__table.are_there_any_empty_piles() and chances > 0:
-			pile_index = int(input("\nPlease identify a pile from the table that you'd like to purchase:  "))
+			pile_index = self.__get_buy_input("\nPlease identify a pile from the table that you'd like to purchase:  ")
 
 			if pile_index < 0:
 				print("You have elected to forfeit any remaining plays.")
@@ -171,6 +153,32 @@ class Player:
 	def print_hand(self):
 		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Hand:")
 		self.__hand.print()
+
+	def __check_play_card(self, hand_index, counter, acceptable_card_type, chances):
+		if hand_index < 0:
+			print("You have elected to forfeit any remaining plays.")
+			if counter is not None:
+				counter.int = 0
+		elif hand_index >= self.__hand.get_remaining():
+			print("Acceptable inputs range from 0 to " + str(self.__hand.get_remaining() - 1) + ".  1 chance lost.")
+			self.play_card(acceptable_card_type, chances - 1, counter)
+		elif self.__hand.get_card(hand_index).get_type() in acceptable_card_type:
+			print("Player " + str(self.get_player_index()) + " playing: " + self.__hand.get_card(hand_index).get_name())
+			self.__hand.get_card(hand_index).play()
+			self.__hand.transfer_card_by_card(self.__hand.get_card(hand_index), self.__discard)
+			if counter is not None:
+				counter.int -= 1
+			self.__print()
+		else:
+			print("Index in bounds but not an acceptable card type.  Chance to get it right reduced.")
+			self.play_card(acceptable_card_type, chances - 1, counter)
+
+	# The following two methods are identical under different names so they can be overridden by bot classes later
+	def __get_play_input(self, message):
+		return int(input(message))
+
+	def __get_buy_input(self, message):
+		return int(input(message))
 
 	def __print_discard(self):
 		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Discard:")

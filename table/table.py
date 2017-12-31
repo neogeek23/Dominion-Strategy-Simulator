@@ -52,7 +52,7 @@ class Table:
 
 	def play(self):
 		turn = 0
-		# turn < 4 is for testing, otherwise endless as buying card is not yet done
+		# turn < 10 is for testing, otherwise endless as buying card is not yet done
 		while not self.are_there_any_empty_piles() and turn < 10:
 			self.print()
 			self.__player[turn % len(self.__player)].take_turn()
