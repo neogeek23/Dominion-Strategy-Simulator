@@ -10,10 +10,11 @@ Things done:
 5)  Game scoring
 
 Things to do:
-1)  Testing classes
-2)  Turn Timer
-3)  Django server and hosting
-4)  HTML5 frontend
-5)  Multiplayer
-6)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
-7)  Choosing play sets
+1)  Make end of game conditions match actual end of game conditions
+2)  Testing classes
+3)  Turn Timer
+4)  Django server and hosting
+5)  HTML5 frontend
+6)  Multiplayer
+7)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
+8)  Choosing play sets
