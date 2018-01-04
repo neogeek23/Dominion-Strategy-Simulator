@@ -11,6 +11,7 @@ Things done:
 
 Things to do:
 1)  Make end of game conditions match actual end of game conditions
+2)  Give bot interactions for attack cards
 2)  Testing classes
 3)  Turn Timer
 4)  Django server and hosting
