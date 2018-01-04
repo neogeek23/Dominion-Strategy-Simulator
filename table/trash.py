@@ -1,5 +1,5 @@
-from table.pile import Pile
+from table.supply import Supply
 
 
-class Trash(Pile):
+class Trash(Supply):
 	pass

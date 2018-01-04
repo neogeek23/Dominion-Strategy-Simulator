@@ -42,7 +42,18 @@ class Player:
 		return self.__table.get_players().index(self)
 
 	def get_score(self):
-		return 0
+		score = 0
+
+		for c in self.__deck.get_supply():
+			score += c.get_points()
+
+		for c in self.__hand.get_supply():
+			score += c.get_points()
+
+		for c in self.__discard.get_supply():
+			score += c.get_points()
+
+		return score
 
 	def draw_card(self):
 		self.__deck.transfer_top_card(self.__hand)
@@ -90,7 +101,7 @@ class Player:
 
 	def play_card(self, acceptable_card_type, chances, counter):
 		if chances > 0 and self.__hand.contains_one_of(acceptable_card_type):
-			hand_index = self.__get_play_input("\nPlease identify a card from hand to play by providing its index:  ")
+			hand_index = self.get_play_input("\nPlease identify a card from hand to play by providing its index:  ")
 			self.__check_play_card(hand_index, counter, acceptable_card_type, chances)
 		elif chances <= 0:
 			print("You have used up all of your chances to enter a valid integer; forfeiting remaining plays.")
@@ -119,7 +130,7 @@ class Player:
 	def buy_card(self, chances):
 		self.__table.print()
 		while self.__buys > 0 and not self.__table.are_there_any_empty_piles() and chances > 0:
-			pile_index = self.__get_buy_input("\nPlease identify a pile from the table that you'd like to purchase:  ")
+			pile_index = self.get_buy_input("\nPlease identify a pile from the table that you'd like to purchase:  ")
 
 			if pile_index < 0:
 				print("You have elected to forfeit any remaining plays.")
@@ -163,8 +174,9 @@ class Player:
 			self.play_card(acceptable_card_type, chances - 1, counter)
 		elif self.__hand.get_card(hand_index).get_type() in acceptable_card_type:
 			print("Player " + str(self.get_player_index()) + " playing: " + self.__hand.get_card(hand_index).get_name())
-			self.__hand.get_card(hand_index).play()
-			self.__hand.transfer_card_by_card(self.__hand.get_card(hand_index), self.__discard)
+			play_card = self.__hand.get_card(hand_index)
+			play_card.play()
+			self.__hand.transfer_card_by_card(play_card, self.__discard)
 			if counter is not None:
 				counter.int -= 1
 			self.__print()
@@ -173,10 +185,10 @@ class Player:
 			self.play_card(acceptable_card_type, chances - 1, counter)
 
 	# The following two methods are identical under different names so they can be overridden by bot classes later
-	def __get_play_input(self, message):
+	def get_play_input(self, message):
 		return int(input(message))
 
-	def __get_buy_input(self, message):
+	def get_buy_input(self, message):
 		return int(input(message))
 
 	def __print_discard(self):
@@ -202,4 +214,10 @@ class Player:
 		self.__purchase_power = 0
 
 	def __str__(self):
-		return "Player " + self.get_player_index() + "."
+		result = "Player " + str(self.get_player_index())
+
+		if self.__is_human:
+			result += " (human)"
+		else:
+			result += " (bot)"
+		return result

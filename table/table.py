@@ -22,8 +22,8 @@ class Table:
 	def get_trash(self):
 		return self.__trash
 
-	def add_pile(self, card):
-		p = Pile()
+	def create_pile(self, card):
+		p = Pile(card)
 		p.add_card(card)
 		card.setup()
 		self.__pile.append(p)
@@ -54,17 +54,18 @@ class Table:
 	def play(self):
 		turn = 0
 		# turn < 10 is for testing, otherwise endless as buying card is not yet done
-		while not self.are_there_any_empty_piles() and turn < 10:
+		while not self.are_there_any_empty_piles(): # and turn < 10:
 			self.print()
 			self.__player[turn % len(self.__player)].take_turn()
 			turn += 1
 		else:
 			self.print()
 			for p in self.__player:
+				print("" + str(p) + " scored " + str(p.get_score()) + " points.")
 				if p.get_score() > self.__winning_score:
-					self.__winning_score = p.get_score
+					self.__winning_score = p.get_score()
 					self.__winner = p
-			print("\n\nPlayer " + str(self.__winner) + " won with " + str(self.__winning_score) + " points.\n\n")
+			print("\n\n" + str(self.__winner) + " won with " + str(self.__winning_score) + " points.\n\n")
 
 	def print(self):
 		print("\nPiles:  ")

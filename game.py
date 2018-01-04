@@ -1,5 +1,6 @@
 from table.table import Table
 from player.player import Player
+from player.bot import Bot
 from card.card import Card
 from card.militia import Militia
 from card.moat import Moat
@@ -25,7 +26,7 @@ def play_game(game_table):
 def setup_new_game(game_list, parameter, card_info):
 	t = Table()
 	humans = parameter[0]
-	# bots = parameter[1]
+	bots = parameter[1]
 
 	index = 0
 	for p in parameter[2:]:
@@ -35,7 +36,7 @@ def setup_new_game(game_list, parameter, card_info):
 		                                   card_info[index][3], card_info[index][4], card_info[index][5],
 		                                   card_info[index][6], card_info[index][7], None)
 				if i == 0:
-					t.add_pile(card)
+					t.create_pile(card)
 				else:
 					t.get_pile(t.get_pile_index_of_card(card_info[index][0])).add_card(card)
 		index += 1
@@ -46,18 +47,18 @@ def setup_new_game(game_list, parameter, card_info):
 		human.draw_hand()
 		t.add_player(human)
 
-	# for i in range(bots):
-	# 	bot = Player(False, t)
-	# 	bot.draw_deck(t, get_starting_deck())
-	# 	bot.draw_hand()
-	# 	t.add_player(bot)
+	for i in range(bots):
+		bot = Bot(False, t)
+		bot.draw_deck(t, get_starting_deck())
+		bot.draw_hand()
+		t.add_player(bot)
 
 	game_list.append(t)
 
 
 def get_game_parameters():
 	# humans, bots, card #1, card #2, ... etc
-	return [2, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
+	return [1, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
 
 
 def get_card_info():
@@ -66,10 +67,10 @@ def get_card_info():
 	return [["Copper",		0, Card.CardType.Treasure,	0,	1, 0, 0, 0, Card,       60],    # 1
 			["Silver",		3, Card.CardType.Treasure,	0,	2, 0, 0, 0, Card,       40],    # 2
 			["Gold",		6, Card.CardType.Treasure,	0,	3, 0, 0, 0, Card,       30],    # 3
-			["Estate",		2, Card.CardType.Victory,	1,	0, 0, 0, 0, Card,       24],    # 4
+			["Estate",		2, Card.CardType.Victory,	1,	0, 0, 0, 0, Card,       40],    # 4
 			["Dutchy",		5, Card.CardType.Victory,	3,	0, 0, 0, 0, Card,       12],    # 5
 			["Province",	8, Card.CardType.Victory,	6,	0, 0, 0, 0, Card,       12],    # 6
-			["Curse",		0, Card.CardType.Curse,		-1,	0, 0, 0, 0, Card,       30],    # 7
+			["Curse",		0, Card.CardType.Curse,		-1,	0, 0, 0, 0, Card,       10],    # 7
 			["Cellar",		2, Card.CardType.Action,	0,	0, 1, 0, 0, Cellar,     10],    # 8
 			["Market",		5, Card.CardType.Action, 	0,	1, 1, 1, 1, Card,       10],    # 9
 			["Merchant",    3, Card.CardType.Action,    0,  0, 1, 0, 1, Merchant,	10],    # 10
@@ -106,14 +107,14 @@ def get_card_info():
 
 
 def get_starting_deck():
-	# return [["Copper", 7], ["Estate", 3]]
+	return [["Copper", 7], ["Estate", 3]]
 	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]
 	# return [["Copper", 4], ["Mine", 2], ["Remodel", 2], ["Workshop", 2]]
-	return [["Copper", 1], ["Silver", 1], ["Gold", 1], ["Estate", 1], ["Dutchy", 1], ["Province", 1], ["Cellar", 1],
-			["Market", 1], ["Merchant", 1], ["Militia", 1], ["Mine", 1], ["Moat", 1], ["Remodel", 1], ["Smithy", 1],
-			["Village", 1], ["Workshop", 1]]
+	# return [["Copper", 1], ["Silver", 1], ["Gold", 1], ["Estate", 1], ["Dutchy", 1], ["Province", 1], ["Cellar", 1],
+	# 		["Market", 1], ["Merchant", 1], ["Militia", 1], ["Mine", 1], ["Moat", 1], ["Remodel", 1], ["Smithy", 1],
+	# 		["Village", 1], ["Workshop", 1]]
 
 
 main()

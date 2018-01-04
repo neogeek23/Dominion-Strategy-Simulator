@@ -44,6 +44,9 @@ class Card:
 	def get_type(self):
 		return self.__type
 
+	def get_points(self):
+		return self.__value
+
 	def get_cost(self):
 		return self.__cost
 
