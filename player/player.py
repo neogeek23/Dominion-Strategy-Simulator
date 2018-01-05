@@ -6,7 +6,7 @@ from card.card import Card
 
 
 class Player:
-	def __init__(self, human, table):
+	def __init__(self, table):
 		self.__std_chances = 3
 		self.__deck = Deck()
 		self.__discard = Discard()
@@ -14,7 +14,6 @@ class Player:
 		self.__purchase_power = 0
 		self.__actions = Counter(0)
 		self.__buys = 0
-		self.__is_human = human
 		self.__table = table
 
 	def add_actions(self, n):
@@ -186,9 +185,15 @@ class Player:
 
 	# The following two methods are identical under different names so they can be overridden by bot classes later
 	def get_play_input(self, message):
-		return int(input(message))
+		return self.get_general_input(message)
 
 	def get_buy_input(self, message):
+		return self.get_general_input(message)
+
+	def militia_input(self, message):
+		return self.get_general_input(message)
+
+	def get_general_input(self, message):
 		return int(input(message))
 
 	def __print_discard(self):
@@ -214,10 +219,4 @@ class Player:
 		self.__purchase_power = 0
 
 	def __str__(self):
-		result = "Player " + str(self.get_player_index())
-
-		if self.__is_human:
-			result += " (human)"
-		else:
-			result += " (bot)"
-		return result
+		return "Player " + str(self.get_player_index())

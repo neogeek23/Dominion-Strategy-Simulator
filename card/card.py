@@ -50,6 +50,9 @@ class Card:
 	def get_cost(self):
 		return self.__cost
 
+	def get_purchase_power(self):
+		return self.__coin
+
 	def set_owner(self, owner):
 		self.__owner = owner
 

@@ -1,6 +1,6 @@
 from table.table import Table
-from player.player import Player
-from player.bot import Bot
+from player.human import Human
+from player.bots.pure_big_money import Pure_Big_Money
 from card.card import Card
 from card.militia import Militia
 from card.moat import Moat
@@ -42,13 +42,13 @@ def setup_new_game(game_list, parameter, card_info):
 		index += 1
 
 	for i in range(humans):
-		human = Player(True, t)
+		human = Human(t)
 		human.draw_deck(t, get_starting_deck())
 		human.draw_hand()
 		t.add_player(human)
 
 	for i in range(bots):
-		bot = Bot(False, t)
+		bot = Pure_Big_Money(t)
 		bot.draw_deck(t, get_starting_deck())
 		bot.draw_hand()
 		t.add_player(bot)
@@ -107,7 +107,7 @@ def get_card_info():
 
 
 def get_starting_deck():
-	return [["Copper", 7], ["Estate", 3]]
+	return [["Copper", 7], ["Militia", 3]]
 	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]

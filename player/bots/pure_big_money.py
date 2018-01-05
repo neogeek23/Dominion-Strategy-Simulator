@@ -2,7 +2,7 @@ from player.player import Player
 from card.card import Card
 
 
-class Bot(Player):
+class Pure_Big_Money(Player):
 	def take_action(self):
 		print("\nAs a BIG MONEY BOT, I'm skipping this unnecessary action phase.  Beep-boop, bow to me humans!")
 
@@ -32,3 +32,25 @@ class Bot(Player):
 
 		print(message + str(choice))
 		return choice
+
+	#This will pick either the first or the first least effective purchasing card as this bot doesn't care about that
+	def militia_input(self, message):
+		choice = self.__get_first_non_Treasure()
+		min_coin = self.get_hand().get_supply()[choice].get_purchase_power()
+
+		for c in self.get_hand().get_supply():
+			if c.get_purchase_power() < min_coin and c.get_type() != Card.CardType.Treasure:
+				min_coin = c.get_purchase_power()
+				choice = self.get_hand().get_supply().index(c)
+
+		print(message + str(choice))
+		return choice
+
+	def __get_first_non_Treasure(self):
+		for c in self.get_hand().get_supply():
+			if c.get_type() != Card.CardType.Treasure:
+				return self.get_hand().get_supply().index(c)
+		return 0
+
+	def __str__(self):
+		return "Player " + str(self.get_player_index()) + " (pure big money bot)"
