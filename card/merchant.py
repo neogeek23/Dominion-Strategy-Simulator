@@ -13,4 +13,4 @@ class Merchant(Card):
 				self._Card__owner.add_purchase_power(3)
 
 	def __get_Merchant_input(self, message):
-		return int(input("Player " + str(self._Card__owner.get_player_index()) + ", " + message))
+		return input("Player " + str(self._Card__owner.get_player_index()) + ", " + message)
