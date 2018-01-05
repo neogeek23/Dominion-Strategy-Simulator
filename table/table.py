@@ -60,13 +60,13 @@ class Table:
 			turn += 1
 		else:
 			self.print()
-			print("Game had " + str(turn) + " turns in " + str(turn/len(self.__player)) + " rounds.")
+			print("\n\nGame had " + str(turn) + " turns in " + str(turn/len(self.__player)) + " rounds.")
 			for p in self.__player:
 				print("" + str(p) + " scored " + str(p.get_score()) + " points.")
 				if p.get_score() > self.__winning_score:
 					self.__winning_score = p.get_score()
 					self.__winner = p
-			print("\n\n" + str(self.__winner) + " won with " + str(self.__winning_score) + " points.\n\n")
+			print("\n" + str(self.__winner) + " won with " + str(self.__winning_score) + " points.\n\n")
 
 	def print(self):
 		print("\nPiles:  ")
