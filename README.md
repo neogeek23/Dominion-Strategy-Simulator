@@ -11,11 +11,10 @@ Things done:
 
 Things to do:
 1)  Make end of game conditions match actual end of game conditions
-2)  Give bot interactions for attack cards
-3)  Testing classes
-4)  Turn Timer
-5)  Django server and hosting
-6)  HTML5 frontend
-7)  Multiplayer
-8)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
-9)  Choosing play sets
+2)  Testing classes
+3)  Turn Timer
+4)  Django server and hosting
+5)  HTML5 frontend
+6)  Multiplayer
+7)  Remaining 2nd Edition Base Cards:  Bureaucrat, Chapel, Feast, Laboratory, Moneylender, Throne Room, Council Room, Festival, Library, Harbringer, Vassal, Gardens, Poacher, Bandit, Witch, Artisan, & Sentry
+8)  Choosing play sets
