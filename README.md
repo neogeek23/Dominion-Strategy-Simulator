@@ -8,6 +8,7 @@ Things done:
 3)  Special First Play cards in 2nd Edition:  Workshop, Remodel, Mine, Merchant, Cellar, Moat, and Militia
 4)  Bot player with big money strategy
 5)  Game scoring
+6)  Input safety
 
 Things to do:
 1)  Make end of game conditions match actual end of game conditions
