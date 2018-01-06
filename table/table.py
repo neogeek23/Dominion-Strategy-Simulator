@@ -81,5 +81,7 @@ class Table:
 			print(str(index) + ":  " + s.identify())
 			index += 1
 
+		print("")
+
 	def __str__(self):
 		return "A table with " + str(len(self.__pile)) + " card piles and " + str(len(self.__player)) + " players."
