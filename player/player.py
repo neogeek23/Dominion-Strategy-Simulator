@@ -3,11 +3,12 @@ from player.discard import Discard
 from player.hand import Hand
 from player.counter import Counter
 from card.card import Card
+from random import randint
 
 
 class Player:
 	def __init__(self, table):
-		self.__std_chances = 3
+		self.__std_chances = 2
 		self.__deck = Deck()
 		self.__discard = Discard()
 		self.__hand = Hand()
@@ -100,7 +101,7 @@ class Player:
 
 	def play_card(self, acceptable_card_type, chances, counter):
 		if chances > 0 and self.__hand.contains_one_of(acceptable_card_type):
-			hand_index = self.get_play_input("\nPlease identify a card from hand to play by providing its index:  ")
+			hand_index = self.get_play_input("\nPlease identify a card from hand to play by providing its index: ", int)
 			self.__check_play_card(hand_index, counter, acceptable_card_type, chances)
 		elif chances <= 0:
 			print("You have used up all of your chances to enter a valid integer; forfeiting remaining plays.")
@@ -129,7 +130,7 @@ class Player:
 	def buy_card(self, chances):
 		self.__table.print()
 		while self.__buys > 0 and not self.__table.are_there_any_empty_piles() and chances > 0:
-			pile_index = self.get_buy_input("\nPlease identify a pile from the table that you'd like to purchase:  ")
+			pile_index = self.get_buy_input("\nPlease choose a pile from the table that you'd like to purchase:  ", int)
 
 			if pile_index < 0:
 				print("You have elected to forfeit any remaining plays.")
@@ -141,11 +142,13 @@ class Player:
 				print("You do not have enough coin.  Try again.")
 				chances -= 1
 			else:
+				self.__buys -= 1
+				self.__purchase_power -= self.__table.get_pile(pile_index).get_card_group().get_cost()
 				print("Player " + str(self.get_table().get_players().index(self)) + " buying card " +
-				      self.__table.get_pile(pile_index).get_card_group().get_name())
+				      self.__table.get_pile(pile_index).get_card_group().get_name() + " leaving " +
+				      str(self.__purchase_power) + " coin(s) and " + str(self.__buys) + " buy(s) following purchase.")
 				self.__table.get_pile(pile_index).transfer_top_card(self.__discard)
 				self.claim_top_card(self.__discard)
-				self.__buys -= 1
 
 	def take_turn(self):
 		self.__turn_setup()
@@ -184,17 +187,46 @@ class Player:
 			self.play_card(acceptable_card_type, chances - 1, counter)
 
 	# The following two methods are identical under different names so they can be overridden by bot classes later
-	def get_play_input(self, message):
-		return self.get_general_input(message)
+	def get_play_input(self, message, target_type):
+		return self.get_general_input(message, target_type)
 
-	def get_buy_input(self, message):
-		return self.get_general_input(message)
+	def get_buy_input(self, message, target_type):
+		return self.get_general_input(message, target_type)
 
-	def militia_input(self, message):
-		return self.get_general_input(message)
+	def militia_input(self, message, target_type):
+		return self.get_general_input(message, target_type)
 
-	def get_general_input(self, message):
-		return int(input(message))
+	def get_general_input(self, message, target_type):
+		return self.__get_input(self.__std_chances, target_type, message)
+
+	def __get_input(self, chances, target_type, message):
+		value = input(message)
+		if chances > 0:
+			if not self.__does_typecast_error(value, target_type):
+				return target_type(value)
+			else:
+				print("'" + str(value) + "' of type " + str(type(value)) + " is an invalid entry.  " + str(chances) +
+				      " chances to input a " + str(target_type) + " remain.")
+				return self.__get_input(chances - 1, target_type, message)
+		else:
+			if target_type == int:
+				rand_value = randint(-1, 1)
+				print("You've run out of chances to input an int.  A random value of '" + str(rand_value) + "' is being"
+				                                                                                        " supplied.")
+				return rand_value
+			elif target_type == str:
+				print("You've run out of chances to input an string.  A zero length string is being supplied.")
+				return ""
+			else:
+				print("You've run out of chances to input a" + str(target_type) + ".  A None is being supplied.")
+				return None
+
+	def __does_typecast_error(self, value, target_type):
+		try:
+			target_type(value)
+			return False
+		except ValueError:
+			return True
 
 	def __print_discard(self):
 		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Discard:")

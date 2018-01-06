@@ -7,7 +7,7 @@ class Pure_Big_Money(Player):
 		print("\nAs a BIG MONEY BOT, I'm skipping this unnecessary action phase.  Beep-boop, bow to me humans!")
 
 	#This method will only be called for this bot when it is time to play treasures, it will play all of them always.
-	def get_play_input(self, message):
+	def get_play_input(self, message, target_type):
 		choice = -1
 		hand = self.get_hand().get_supply()
 
@@ -19,7 +19,7 @@ class Pure_Big_Money(Player):
 		return choice
 
 	#This method will only be called when it is time to buy things, a very simple logic will decide its action.
-	def get_buy_input(self, message):
+	def get_buy_input(self, message, target_type):
 		coin = self._Player__purchase_power
 		choice = -1
 

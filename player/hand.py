@@ -27,15 +27,12 @@ class Hand(Supply):
 				found_at = self._Supply__card.index(c)
 
 		if found_at >= 0:
-			yes_no = "Y" == self.__get_reveal("Player "
-											  + str(self._Supply__card[found_at].get_owner().get_player_index())
-											  + ", enter 'Y' if you'd like to reveal "
-											  + self._Supply__card[found_at].get_name() + " to block the "
-											  + what_attack + " attack:  ")
+			owner = self._Supply__card[found_at].get_owner()
+			yes_no = "Y" == owner.get_general_input("Player " + str(owner.get_player_index()) + ", enter 'Y' if you'd "
+			                                                                                    "like to reveal "
+			                                        + self._Supply__card[found_at].get_name() + " to block the "
+			                                        + what_attack + " attack:  ", str)
 		return yes_no
-
-	def __get_reveal(self, message):
-		return input(message)
 
 	def __get_unique_types(self):
 		unique_type = list()
