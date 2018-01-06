@@ -29,7 +29,7 @@ class CardTrash(Card):
 		self.trash_card_get_cost()
 
 	def __get_card_to_trash(self):
-		return int(input("\nPlease identify the index of the desired card to trash:  "))
+		return self.__Card_owner.get_general_input("\nPlease identify the index of the desired card to trash:  ", int)
 
 	def __get_trashable_cards(self):
 		result = list()

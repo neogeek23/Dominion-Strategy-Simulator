@@ -23,5 +23,5 @@ class Cellar(Card):
 		self._Card__owner.draw_cards(cards_discarded)
 
 	def __get_index(self, message):
-		return int(input(message))
+		return self.__Card_owner.get_general_input(message, int)
 
