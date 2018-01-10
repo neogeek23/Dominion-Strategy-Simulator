@@ -1,6 +1,6 @@
 from player.player import Player
-from card.card import Card
-#name943meats23jet
+from card.basic.card_treasure import Treasure
+
 
 class Pure_Big_Money(Player):
 	def take_action(self):
@@ -12,7 +12,7 @@ class Pure_Big_Money(Player):
 		hand = self.get_hand().get_supply()
 
 		for c in hand:
-			if c.get_type() == Card.CardType.Treasure:
+			if isinstance(c, Treasure):
 				choice = hand.index(c)
 
 		print(message + str(choice))
@@ -39,7 +39,10 @@ class Pure_Big_Money(Player):
 		min_coin = self.get_hand().get_supply()[choice].get_purchase_power()
 
 		for c in self.get_hand().get_supply():
-			if c.get_purchase_power() < min_coin and c.get_type() != Card.CardType.Treasure:
+			# We want to do isinstance rather than not isinstance because we only want to evaluate this loop when we are
+			# evaluating an all treasure card hand as at that point the choice will be a treasure card, otherwise the
+			# choice will already be non-treasure and we don't need to check anything since this bot doesn't do action
+			if c.get_purchase_power() < min_coin and isinstance(c, Treasure):
 				min_coin = c.get_purchase_power()
 				choice = self.get_hand().get_supply().index(c)
 
@@ -48,7 +51,7 @@ class Pure_Big_Money(Player):
 
 	def __get_first_non_Treasure(self):
 		for c in self.get_hand().get_supply():
-			if c.get_type() != Card.CardType.Treasure:
+			if not isinstance(c, Treasure):
 				return self.get_hand().get_supply().index(c)
 		return 0
 
