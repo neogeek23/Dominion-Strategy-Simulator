@@ -107,8 +107,8 @@ def get_card_info():
 
 
 def get_starting_deck():
-	return [["Copper", 7], ["Estate", 3]]
-	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
+	# return [["Copper", 7], ["Estate", 3]]
+	return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]
 	# return [["Copper", 4], ["Mine", 2], ["Remodel", 2], ["Workshop", 2]]

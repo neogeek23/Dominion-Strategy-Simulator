@@ -1,6 +1,6 @@
 from player.player import Player
 from card.card import Card
-
+#name943meats23jet
 
 class Pure_Big_Money(Player):
 	def take_action(self):
@@ -34,7 +34,7 @@ class Pure_Big_Money(Player):
 		return choice
 
 	#This will pick either the first or the first least effective purchasing card as this bot doesn't care about that
-	def militia_input(self, message):
+	def militia_input(self, message, target_type):
 		choice = self.__get_first_non_Treasure()
 		min_coin = self.get_hand().get_supply()[choice].get_purchase_power()
 

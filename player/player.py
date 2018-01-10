@@ -8,7 +8,7 @@ from random import randint
 
 class Player:
 	def __init__(self, table):
-		self.__std_chances = 2
+		self.__std_chances = 3
 		self.__deck = Deck()
 		self.__discard = Discard()
 		self.__hand = Hand()
@@ -136,11 +136,13 @@ class Player:
 				print("You have elected to forfeit any remaining plays.")
 				self.__buys = 0
 			elif pile_index >= self.__table.get_pile_count():
-				print("Acceptable inputs range from 0 to " + str(self.__table.get_pile_count() - 1) + ".  Try again.")
+				print("Acceptable inputs range from 0 to " + str(self.__table.get_pile_count() - 1) + ".")
 				chances -= 1
+				print("You have " + str(chances) + " chances left to input correctly.")
 			elif self.__table.get_pile(pile_index).get_card_group().get_cost() > self.__purchase_power:
-				print("You do not have enough coin.  Try again.")
+				print("You do not have enough coin.")
 				chances -= 1
+				print("You have " + str(chances) + " chances left to input correctly.")
 			else:
 				self.__buys -= 1
 				self.__purchase_power -= self.__table.get_pile(pile_index).get_card_group().get_cost()
@@ -149,6 +151,7 @@ class Player:
 				      str(self.__purchase_power) + " coin(s) and " + str(self.__buys) + " buy(s) following purchase.")
 				self.__table.get_pile(pile_index).transfer_top_card(self.__discard)
 				self.claim_top_card(self.__discard)
+				chances = self.get_std_chances()
 
 	def take_turn(self):
 		self.__turn_setup()
@@ -243,7 +246,7 @@ class Player:
 		print("Coin:  " + str(self.__purchase_power))
 		self.print_hand()
 		self.__print_discard()
-		# self.__print_deck()
+		print("")
 
 	def __turn_setup(self):
 		self.__actions.int = 1
