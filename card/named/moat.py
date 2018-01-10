@@ -1,5 +1,6 @@
-from card.card import Card
+from card.basic.card_action import  Action
+from card.basic.card_reaction import Reaction
 
 
-class Moat(Card):
+class Moat(Action, Reaction):
 	prevent_attack = True

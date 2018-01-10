@@ -6,10 +6,10 @@ class CardTrash(Card):
 
 	def trash_card_get_cost(self):
 		tc = self.__get_trashable_cards()
-		self._Card__print_card_list(tc, " Trashable Cards:  ")
+		self.print_card_list(tc, " Trashable Cards:  ")
 		index = 0
 		bonus = 0
-		chances = self._Card__owner.get_std_chances()
+		chances = self.get_owner().get_std_chances()
 
 		while 0 < len(tc) and 0 <= index < len(tc) - 1 and chances > 0:
 			index = self.__get_card_to_trash()
@@ -19,9 +19,9 @@ class CardTrash(Card):
 				index = 0
 				chances -= 1
 			else:
-				print("Player " + str(self._Card__owner.get_player_index()) + " trashing " + tc[index].get_name() + ".")
+				print("Player " + str(self.get_owner().get_player_index()) + " trashing " + tc[index].get_name() + ".")
 				bonus = tc[index].get_cost()
-				self._Card__owner.get_hand().transfer_card_by_card(tc[index], self._Card__owner.get_table().get_trash())
+				self.get_owner().get_hand().transfer_card_by_card(tc[index], self.get_owner().get_table().get_trash())
 				chances = 0
 		return bonus
 
@@ -29,15 +29,15 @@ class CardTrash(Card):
 		self.trash_card_get_cost()
 
 	def __get_card_to_trash(self):
-		return self.__Card_owner.get_general_input("\nPlease identify the index of the desired card to trash:  ", int)
+		return self.get_owner().get_general_input("\nPlease identify the index of the desired card to trash:  ", int)
 
 	def __get_trashable_cards(self):
 		result = list()
 
-		for c in self._Card__owner.get_hand().get_supply():
+		for c in self.get_owner().get_hand().get_supply():
 			if c != self:
 				if self.trashable_type_restriction is None:
 					result.append(c)
-				elif c.get_type() in self.trashable_type_restriction:
+				elif isinstance(c, self.trashable_type_restriction):
 					result.append(c)
 		return result

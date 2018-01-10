@@ -1,8 +1,9 @@
-from card.card import Card
+from card.basic.card_attack import Attack
+from card.basic.card_action import Action
 from random import randint
 
 
-class Militia(Card):
+class Militia(Action, Attack):
 	def effect(self):
 		for player in self._Card__owner.get_table().get_players():
 			if self._Card__owner != player and not player.get_hand().blocks_attack(self.get_name()):

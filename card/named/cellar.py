@@ -1,7 +1,7 @@
-from card.card import Card
+from card.basic.card_action import Action
 
 
-class Cellar(Card):
+class Cellar(Action):
 	def effect(self):
 		hand_index = 0
 		cards_discarded = 0
