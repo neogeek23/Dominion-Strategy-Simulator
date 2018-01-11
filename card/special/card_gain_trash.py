@@ -1,5 +1,5 @@
-from card.card_trash import CardTrash
-from card.card_gain import CardGain
+from card.special.card_trash import CardTrash
+from card.special.card_gain import CardGain
 
 
 class CardGainTrash(CardTrash, CardGain):

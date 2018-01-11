@@ -1,7 +1,7 @@
-from card.card import Card
+from card.basic.card_action import Action
 
 
-class Merchant(Card):
+class Merchant(Action):
 	def effect(self):
 		silver_card_index = self._Card__owner.get_hand().get_index_of_card_by_name("Silver")
 		if silver_card_index >= 0:

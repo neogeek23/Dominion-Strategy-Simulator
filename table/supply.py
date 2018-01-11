@@ -43,7 +43,8 @@ class Supply:
 		return self.__card[n]
 
 	def get_top_card(self):
-		return self.__card[len(self.__card) - 1]
+		if len(self.__card) > 0:
+			return self.__card[len(self.__card) - 1]
 
 	def get_remaining(self):
 		return len(self.__card)

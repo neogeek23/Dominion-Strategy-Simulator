@@ -1,14 +1,21 @@
 from table.table import Table
 from player.human import Human
 from player.bots.pure_big_money import Pure_Big_Money
-from card.card import Card
-from card.militia import Militia
-from card.moat import Moat
-from card.cellar import Cellar
-from card.merchant import Merchant
-from card.mine import Mine
-from card.remodel import Remodel
-from card.workshop import Workshop
+from card.basic.card_action import Action
+from card.basic.card_curse import Curse
+from card.basic.card_victory import Victory
+from card.named.province import Province
+from card.named.estate import Estate
+from card.named.copper import Copper
+from card.named.silver import Silver
+from card.named.gold import Gold
+from card.named.militia import Militia
+from card.named.moat import Moat
+from card.named.cellar import Cellar
+from card.named.merchant import Merchant
+from card.named.mine import Mine
+from card.named.remodel import Remodel
+from card.named.workshop import Workshop
 
 
 def main():
@@ -31,14 +38,15 @@ def setup_new_game(game_list, parameter, card_info):
 	index = 0
 	for p in parameter[2:]:
 		if p:
-			for i in range(card_info[index][9]):
-				card = card_info[index][8](card_info[index][0], card_info[index][1], card_info[index][2],
-		                                   card_info[index][3], card_info[index][4], card_info[index][5],
-		                                   card_info[index][6], card_info[index][7], None)
+			for i in range(card_info[index][7].pile_setup(humans + bots)):
+				card = card_info[index][7](card_info[index][0], card_info[index][1], card_info[index][2],
+										   card_info[index][3], card_info[index][4], card_info[index][5],
+		                                   card_info[index][6], None)
 				if i == 0:
 					t.create_pile(card)
 				else:
 					t.get_pile(t.get_pile_index_of_card(card_info[index][0])).add_card(card)
+			card_info[index][7].setup()
 		index += 1
 
 	for i in range(humans):
@@ -58,29 +66,29 @@ def setup_new_game(game_list, parameter, card_info):
 
 def get_game_parameters():
 	# humans, bots, card #1, card #2, ... etc
-	return [1, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
+	return [2, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
 
 
 def get_card_info():
-	#       0               1   2                       3   4  5  6  7  8           9
-	#		[name, 		cost, cardtype,			    	v,	c, a, b, d, class,      count] - values to pass to Card()
-	return [["Copper",		0, Card.CardType.Treasure,	0,	1, 0, 0, 0, Card,       60],    # 1
-			["Silver",		3, Card.CardType.Treasure,	0,	2, 0, 0, 0, Card,       40],    # 2
-			["Gold",		6, Card.CardType.Treasure,	0,	3, 0, 0, 0, Card,       30],    # 3
-			["Estate",		2, Card.CardType.Victory,	1,	0, 0, 0, 0, Card,       40],    # 4
-			["Dutchy",		5, Card.CardType.Victory,	3,	0, 0, 0, 0, Card,       12],    # 5
-			["Province",	8, Card.CardType.Victory,	6,	0, 0, 0, 0, Card,       12],    # 6
-			["Curse",		0, Card.CardType.Curse,		-1,	0, 0, 0, 0, Card,       10],    # 7
-			["Cellar",		2, Card.CardType.Action,	0,	0, 1, 0, 0, Cellar,     10],    # 8
-			["Market",		5, Card.CardType.Action, 	0,	1, 1, 1, 1, Card,       10],    # 9
-			["Merchant",    3, Card.CardType.Action,    0,  0, 1, 0, 1, Merchant,	10],    # 10
-			["Militia",		4, Card.CardType.Attack,	0,	2, 0, 0, 0, Militia,	10],    # 11
-			["Mine", 		5, Card.CardType.Action, 	0, 	0, 0, 0, 0, Mine,       10],    # 12
-			["Moat",		2, Card.CardType.Reaction,	0,	0, 0, 0, 2, Moat,       10],    # 13
-			["Remodel", 	4, Card.CardType.Action,	0,	0, 0, 0, 0, Remodel,    10],    # 14
-			["Smithy",		4, Card.CardType.Action,	0,	0, 0, 0, 3, Card,       10],    # 15
-			["Village",		3, Card.CardType.Action,	0,	0, 2, 0, 1, Card,       10],    # 16
-			["Workshop",	4, Card.CardType.Action,	0,	0, 0, 0, 0, Workshop,	10]]    # 17
+	#       0               1  2    3  4  5  6  7
+	#		[name, 		 cost, v,	c, a, b, d, class] - values to pass to Card()
+	return [["Copper",		0, 0,	1, 0, 0, 0, Copper],    	# 0
+			["Silver",		3, 0,	2, 0, 0, 0, Silver],		# 1
+			["Gold",		6, 0,	3, 0, 0, 0, Gold],	    	# 2
+			["Estate",		2, 1,	0, 0, 0, 0, Estate],		# 3
+			["Dutchy",		5, 3,	0, 0, 0, 0, Victory],		# 4
+			["Province",	8, 6,	0, 0, 0, 0, Province],    	# 5
+			["Curse",		0, -1,	0, 0, 0, 0, Curse],    		# 6
+			["Cellar",		2, 0,	0, 1, 0, 0, Cellar],    	# 7
+			["Market",		5, 0,	1, 1, 1, 1, Action],    	# 8
+			["Merchant",    3, 0,	0, 1, 0, 1, Merchant],		# 9
+			["Militia",		4, 0,	2, 0, 0, 0, Militia],		# 10
+			["Mine", 		5, 0, 	0, 0, 0, 0, Mine],    		# 11
+			["Moat",		2, 0,	0, 0, 0, 2, Moat],    		# 12
+			["Remodel", 	4, 0,	0, 0, 0, 0, Remodel],		# 13
+			["Smithy",		4, 0,	0, 0, 0, 3, Action],    	# 14
+			["Village",		3, 0,	0, 2, 0, 1, Action],    	# 15
+			["Workshop",	4, 0,	0, 0, 0, 0, Workshop]]		# 16
 	#	Big Money
 	#		["Adventurer",
 	#		["Bureaucrat",
@@ -107,8 +115,8 @@ def get_card_info():
 
 
 def get_starting_deck():
-	# return [["Copper", 7], ["Estate", 3]]
-	return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
+	return [["Copper", 7], ["Estate", 3]]
+	# return [["Market", 2], ["Merchant", 2], ["Smithy", 2], ["Village", 2], ["Moat", 2]]
 	# return [["Militia", 4], ["Cellar", 3], ["Moat", 3]]
 	# return [["Silver", 7], ["Merchant", 3]]
 	# return [["Copper", 4], ["Mine", 2], ["Remodel", 2], ["Workshop", 2]]

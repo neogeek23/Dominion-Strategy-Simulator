@@ -1,22 +1,11 @@
-from enum import Enum, auto
-
-
 class Card:
-	class CardType(Enum):
-		Treasure = auto()
-		Action = auto()
-		Reaction = auto()
-		Attack = auto()
-		Victory = auto()
-		Curse = auto()
+	normal_full_table = 6
+	pile_player_rate = 10
 
-	prevent_attack = False
-
-	def __init__(self, name, cost, cardtype, value, coin, action, buy, draw, owner):
+	def __init__(self, name, cost, value, coin, action, buy, draw, owner):
 		self.__name = name
 		self.__cost = cost
 		self.__coin = coin
-		self.__type = cardtype
 		self.__action = action
 		self.__buy = buy
 		self.__draw = draw
@@ -34,15 +23,21 @@ class Card:
 		# This is here so that 'special' card can override this function so that unique card effects can happen.
 		pass
 
-	def setup(self):
+	def react(self, what_attack):
+		return False
+
+	@classmethod
+	def pile_setup(cls, player_count):
+		# This is here so that each card can override this function so that the right number of .
+		pass
+
+	@staticmethod
+	def setup():
 		# This is here so that 'special' card can override this function so that unique card setup effects can happen.
 		pass
 
 	def get_name(self):
 		return self.__name
-
-	def get_type(self):
-		return self.__type
 
 	def get_points(self):
 		return self.__value
@@ -60,7 +55,15 @@ class Card:
 		return self.__owner
 
 	def identify(self):
-		return self.__name + ", " + str(self.__type) + ", " + str(self.__cost)
+		return self.__name + ", " + self.__str__() + ", costing " + str(self.__cost)
+
+	def print_card_list(self, card, message):
+		print("\nPlayer " + str(self._Card__owner.get_player_index()) + " " + message)
+
+		counter = 0
+		for c in card:
+			print(str(counter) + ":  " + c.identify())
+			counter += 1
 
 	def __get_index_not_self(self):
 		result = -1
@@ -69,13 +72,5 @@ class Card:
 				result = self._Card__owner.get_hand().get_player_index()
 		return result
 
-	def __print_card_list(self, card, message):
-		print("\nPlayer " + str(self._Card__owner.get_player_index()) + " " + message)
-
-		counter = 0
-		for c in card:
-			print(str(counter) + ":  " + c.identify())
-			counter += 1
-
 	def __str__(self):
-		return "A " + self.__name + " card."
+		return "a " + self.__name + " card"
