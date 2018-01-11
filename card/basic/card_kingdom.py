@@ -5,6 +5,6 @@ from math import floor
 class Kingdom(Card):
     pile_player_rate = 10
 
-    @staticmethod
-    def pile_setup(player_count):
-        return (floor(player_count/Card.normal_full_table) + 1) * Card.pile_player_rate
+    @classmethod
+    def pile_setup(cls, player_count):
+        return (floor(player_count/cls.normal_full_table) + 1) * cls.pile_player_rate

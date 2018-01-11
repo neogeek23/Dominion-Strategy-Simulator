@@ -1,5 +1,4 @@
 class Card:
-	prevent_attack = False
 	normal_full_table = 6
 	pile_player_rate = 10
 
@@ -23,6 +22,9 @@ class Card:
 	def effect(self):
 		# This is here so that 'special' card can override this function so that unique card effects can happen.
 		pass
+
+	def react(self, what_attack):
+		return False
 
 	@classmethod
 	def pile_setup(cls, player_count):

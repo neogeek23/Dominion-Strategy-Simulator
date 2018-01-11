@@ -1,10 +1,10 @@
-from card.card import Card
+from card.basic.card_victory import Victory
 
 
-class Curse(Card):
-    @staticmethod
-    def pile_setup(player_count):
-        if player_count % Card.normal_full_table < Card.normal_full_table/2:
-            return Card.pile_player_rate
+class Curse(Victory):
+    @classmethod
+    def pile_setup(cls, player_count):
+        if player_count % cls.normal_full_table < cls.normal_full_table/2:
+            return Victory.pile_player_rate
         else:
-            return (player_count - 1) * Card.pile_player_rate
+            return (player_count - 1) * cls.pile_player_rate

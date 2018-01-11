@@ -1,5 +1,6 @@
 from table.trash import Trash
 from table.pile import Pile
+from card.named.province import Province
 
 
 class Table:
@@ -45,22 +46,34 @@ class Table:
 				result = self.__pile.index(p)
 		return result
 
-	def are_there_any_empty_piles(self):
-		result = False
+	def are_there_three_empty_piles(self):
+		count = 0
 		for p in self.__pile:
-			result = result or p.get_remaining() == 0
-		return result
+			if p.get_remaining() == 0:
+				count += 1
+		return count > 2
+
+	def has_provinces_run_out(self):
+		for p in self.__pile:
+			if isinstance(p.get_card_group(), Province):
+				return p.get_remaining() == 0
+		return False
+
+	def should_game_end(self):
+		return self.are_there_three_empty_piles() or self. has_provinces_run_out()
 
 	def play(self):
-		turn = 0
-		# turn < 10 is for testing, otherwise endless as buying card is not yet done
-		while not self.are_there_any_empty_piles(): # and turn < 10:
+		player_turn = 0
+		should_continue = True
+		while should_continue:
+			# game ends after
+			should_continue = not self.should_game_end() or player_turn % len(self.__player) != 0
 			self.print()
-			self.__player[turn % len(self.__player)].take_turn()
-			turn += 1
+			self.__player[player_turn % len(self.__player)].take_turn()
+			player_turn += 1
 		else:
 			self.print()
-			print("\n\nGame had " + str(turn) + " turns in " + str(turn/len(self.__player)) + " rounds.")
+			print("\n\nGame had " + str(player_turn) + " turns in " + str(player_turn/len(self.__player)) + " rounds.")
 			for p in self.__player:
 				print("" + str(p) + " scored " + str(p.get_score()) + " points.")
 				if p.get_score() > self.__winning_score:

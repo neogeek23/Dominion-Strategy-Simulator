@@ -4,6 +4,7 @@ from player.bots.pure_big_money import Pure_Big_Money
 from card.basic.card_action import Action
 from card.basic.card_curse import Curse
 from card.basic.card_victory import Victory
+from card.named.province import Province
 from card.named.estate import Estate
 from card.named.copper import Copper
 from card.named.silver import Silver
@@ -65,7 +66,7 @@ def setup_new_game(game_list, parameter, card_info):
 
 def get_game_parameters():
 	# humans, bots, card #1, card #2, ... etc
-	return [1, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
+	return [2, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
 
 
 def get_card_info():
@@ -76,7 +77,7 @@ def get_card_info():
 			["Gold",		6, 0,	3, 0, 0, 0, Gold],	    	# 2
 			["Estate",		2, 1,	0, 0, 0, 0, Estate],		# 3
 			["Dutchy",		5, 3,	0, 0, 0, 0, Victory],		# 4
-			["Province",	8, 6,	0, 0, 0, 0, Victory],    	# 5
+			["Province",	8, 6,	0, 0, 0, 0, Province],    	# 5
 			["Curse",		0, -1,	0, 0, 0, 0, Curse],    		# 6
 			["Cellar",		2, 0,	0, 1, 0, 0, Cellar],    	# 7
 			["Market",		5, 0,	1, 1, 1, 1, Action],    	# 8

@@ -20,7 +20,7 @@ class Pure_Big_Money(Player):
 
 	#This method will only be called when it is time to buy things, a very simple logic will decide its action.
 	def get_buy_input(self, message, target_type):
-		coin = self._Player__purchase_power
+		coin = self.get_coin()
 		choice = -1
 
 		if coin >= 8:

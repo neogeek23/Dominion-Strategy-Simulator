@@ -42,6 +42,9 @@ class Player:
 	def get_player_index(self):
 		return self.__table.get_players().index(self)
 
+	def get_coin(self):
+		return self.__purchase_power
+
 	def get_score(self):
 		score = 0
 
@@ -129,7 +132,7 @@ class Player:
 
 	def buy_card(self, chances):
 		self.__table.print()
-		while self.__buys > 0 and not self.__table.are_there_any_empty_piles() and chances > 0:
+		while self.__buys > 0 and not self.__table.are_there_three_empty_piles() and chances > 0:
 			pile_index = self.get_buy_input("\nPlease choose a pile from the table that you'd like to purchase:  ", int)
 
 			if pile_index < 0:
@@ -232,7 +235,6 @@ class Player:
 			return True
 
 	def __print_discard(self):
-		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Discard:")
 		self.__discard.print()
 
 	def __print_deck(self):
@@ -244,8 +246,9 @@ class Player:
 		print("Actions:  " + str(self.__actions.int))
 		print("Buys:  " + str(self.__buys))
 		print("Coin:  " + str(self.__purchase_power))
-		self.print_hand()
+		print("Deck Remaining:  " + str(self.__deck.get_remaining()))
 		self.__print_discard()
+		self.print_hand()
 		print("")
 
 	def __turn_setup(self):
