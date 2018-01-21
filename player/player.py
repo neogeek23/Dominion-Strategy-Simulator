@@ -39,6 +39,9 @@ class Player:
 	def get_discard(self):
 		return self.__discard
 
+	def get_deck(self):
+		return self.__deck
+
 	def get_player_index(self):
 		return self.__table.get_players().index(self)
 
@@ -103,18 +106,30 @@ class Player:
 	def discard_from_hand(self, n):
 		self.__hand.transfer_card_by_index(n, self.__discard)
 
-	def play_card(self, acceptable_card_class, chances, counter):
-		if chances > 0 and self.__hand.contains_one_of(acceptable_card_class):
-			hand_index = self.get_play_input("\nPlease identify a card from hand to play by providing its index: ", int)
-			self.__check_play_card(hand_index, counter, acceptable_card_class, chances)
-		elif chances <= 0:
-			print("You have used up all of your chances to enter a valid integer; forfeiting remaining plays.")
-			if counter is not None:
-				counter.int = 0
-		else:
-			print("There are no more acceptable card in hand, moving to next phase.")
-			if counter is not None:
-				counter.int = 0
+	def claim_top_card(self, supply):
+		supply.get_top_card().set_owner(self)
+
+	def print_hand(self):
+		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Hand:")
+		self.__hand.print()
+
+	def take_turn(self):
+		self.__turn_setup()
+		self.__print()
+		self.take_action()
+		self.take_buy()
+		self.discard_remaining_hand()
+		self.draw_hand()
+
+	# The following two methods are identical under different names so they can be overridden by bot classes later
+	def get_play_input(self, message, target_type, card_restriction):
+		return self.__get_input(self.__std_chances, target_type, message)
+
+	def get_buy_input(self, message, target_type):
+		return self.__get_input(self.__std_chances, target_type, message)
+
+	def get_response_input(self, message, target_type, card_restriction):
+		return self.__get_input(self.__std_chances, target_type, message)
 
 	def take_action(self):
 		print("\nPlease play an Action card until you have no remaining actions.")
@@ -129,6 +144,20 @@ class Player:
 			while play_another.int > 0:
 				self.play_card(Treasure, self.__std_chances, play_another)
 		self.buy_card(self.__std_chances)
+
+	def play_card(self, acceptable_card_class, chances, counter):
+		if chances > 0 and self.__hand.contains_one_of(acceptable_card_class):
+			hand_index = self.get_play_input("\nPlease identify a card from hand to play by providing its index: ", int,
+											 acceptable_card_class)
+			self.__check_play_card(hand_index, counter, acceptable_card_class, chances)
+		elif chances <= 0:
+			print("You have used up all of your chances to enter a valid integer; forfeiting remaining plays.")
+			if counter is not None:
+				counter.int = 0
+		else:
+			print("There are no more acceptable card in hand, moving to next phase.")
+			if counter is not None:
+				counter.int = 0
 
 	def buy_card(self, chances):
 		self.__table.print()
@@ -156,22 +185,6 @@ class Player:
 				self.claim_top_card(self.__discard)
 				chances = self.get_std_chances()
 
-	def take_turn(self):
-		self.__turn_setup()
-		self.__print()
-		self.take_action()
-		self.take_buy()
-		self.discard_remaining_hand()
-		self.draw_hand()
-		self.print_hand()
-
-	def claim_top_card(self, supply):
-		supply.get_top_card().set_owner(self)
-
-	def print_hand(self):
-		print("\nPlayer " + str(self.__table.get_players().index(self)) + " Hand:")
-		self.__hand.print()
-
 	def __check_play_card(self, hand_index, counter, acceptable_card_class, chances):
 		if hand_index < 0:
 			print("You have elected to forfeit any remaining plays.")
@@ -191,19 +204,6 @@ class Player:
 		else:
 			print("Index in bounds but not an acceptable card type.  Chance to get it right reduced.")
 			self.play_card(acceptable_card_class, chances - 1, counter)
-
-	# The following two methods are identical under different names so they can be overridden by bot classes later
-	def get_play_input(self, message, target_type):
-		return self.get_general_input(message, target_type)
-
-	def get_buy_input(self, message, target_type):
-		return self.get_general_input(message, target_type)
-
-	def militia_input(self, message, target_type):
-		return self.get_general_input(message, target_type)
-
-	def get_general_input(self, message, target_type):
-		return self.__get_input(self.__std_chances, target_type, message)
 
 	def __get_input(self, chances, target_type, message):
 		value = input(message)

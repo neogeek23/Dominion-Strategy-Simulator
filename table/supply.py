@@ -9,6 +9,9 @@ class Supply:
 		for i in range(n):
 			self.add_card(card)
 
+	def is_empty(self):
+		return len(self.__card) <= 0
+
 	def get_supply(self):
 		return self.__card
 
