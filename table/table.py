@@ -46,6 +46,9 @@ class Table:
 				result = self.__pile.index(p)
 		return result
 
+	def pile_is_empty(self, card_name):
+		return self.__pile[self.get_pile_index_of_card(card_name)].is_empty()
+
 	def are_there_three_empty_piles(self):
 		count = 0
 		for p in self.__pile:
@@ -67,7 +70,7 @@ class Table:
 		should_continue = True
 		while should_continue:
 			# game ends after
-			should_continue = not self.should_game_end() or player_turn % len(self.__player) != 0
+			should_continue = not self.should_game_end() or player_turn % len(self.__player) != len(self.__player) - 1
 			self.print()
 			self.__player[player_turn % len(self.__player)].take_turn()
 			player_turn += 1

@@ -1,6 +1,8 @@
 from table.table import Table
 from player.human import Human
 from player.bots.pure_big_money import Pure_Big_Money
+from player.bots.smithy_big_money import Smithy_Big_Money
+from player.bots.militia_big_money import Militia_Big_Money
 from card.basic.card_action import Action
 from card.basic.card_curse import Curse
 from card.basic.card_victory import Victory
@@ -56,7 +58,12 @@ def setup_new_game(game_list, parameter, card_info):
 		t.add_player(human)
 
 	for i in range(bots):
-		bot = Pure_Big_Money(t)
+		if i % 3 == 0:
+			bot = Militia_Big_Money(t)
+		elif i % 3 == 1:
+			bot = Smithy_Big_Money(t)
+		else:
+			bot = Pure_Big_Money(t)
 		bot.draw_deck(t, get_starting_deck())
 		bot.draw_hand()
 		t.add_player(bot)
@@ -66,7 +73,7 @@ def setup_new_game(game_list, parameter, card_info):
 
 def get_game_parameters():
 	# humans, bots, card #1, card #2, ... etc
-	return [2, 1, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
+	return [0, 3, True, True, True, True, True, True, False, True, True, True, True, True, True, True, True, True, True]
 
 
 def get_card_info():

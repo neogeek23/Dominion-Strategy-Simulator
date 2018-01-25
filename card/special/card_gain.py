@@ -26,7 +26,7 @@ class CardGain(Card):
 				chances = 0
 
 	def __get_gain_card(self):
-		return self.get_owner().get_general_input("\nPlease identify the index of which card you would like to "
+		return self.get_owner().take_input("\nPlease identify the index of which card you would like to "
 		                                           "obtain:  ", int)
 
 	def __get_gainable_cards(self, spending_limit):

@@ -22,7 +22,11 @@ class Hand(Supply):
 		attack_blocked = False
 		for c in self.get_supply():
 			attack_blocked |= c.react(what_attack)
-		return attack_blocked
+			if attack_blocked:
+				print(str(c.get_owner()) + " has " + str(c) + " as the " + str(self.get_supply().index(c)) +
+					  ' and blocked the ' + what_attack + " attack.")
+				return True
+		return False
 
 	def __get_unique_class_instances(self):
 		unique_class_instances = list()
